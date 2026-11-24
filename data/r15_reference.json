@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "source": "Derived from standard Roblox Classic R15 / Roxie proportions and Roblox Studio UGCValidation calibration.",
+  "calibration_note": "Standing HRP height (-2.7009 floor offset, HRP Y=2.7025) and CurveAnimTemplateRigClassicR15/Roxie fingertip calibration (~0.75 stud hand tip).",
+  "coordinate_convention": {
+    "blender_r15_bone_axes": {
+      "X": [1.0, 0.0, 0.0],
+      "Y": [0.0, 0.0, 1.0],
+      "Z": [0.0, -1.0, 0.0],
+      "description": "Blender edit bones in upright I-pose with tail = head + (0,0,0.20), roll = 0.0. +X=Char Left (-X_rbx), +Y_bone=+Z_bl=+Y_rbx (Up), +Z_bone=-Y_bl=-Z_rbx (Forward)."
+    },
+    "blender_to_roblox_quaternion": "q_rbx = (q_bl.w, -q_bl.x, +q_bl.y, -q_bl.z)",
+    "roblox_euler_curve_order": "XYZ",
+    "roblox_pose_euler_order": "YXZ (equals Blender to_euler('ZXY') on q_rbx)"
+  },
+  "pelvis_rest_height_blender": 0.70,
+  "tail_offset_blender": [0.0, 0.0, 0.20],
+  "fbx_export_defaults": {
+    "use_selection": true,
+    "object_types": ["ARMATURE"],
+    "global_scale": 0.01,
+    "add_leaf_bones": false,
+    "bake_anim": true,
+    "bake_anim_use_all_actions": false,
+    "bake_anim_use_nla_strips": false,
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "bake_anim_simplify_factor": 1.0
+  },
+  "roblox_standing_hrp_y_studs": 2.7025,
+  "roblox_floor_rel_hrp_y_studs": -2.7009,
+  "studs_per_blender_meter": 3.8584,
+  "bones": [
+    {"name": "HumanoidRootPart", "parent": null, "head": [0.0, 0.0, 0.0], "tail": [0.0, 0.0, 0.2], "roll": 0.0, "rbx_studs_offset": [0.0, 0.0, 0.0]},
+    {"name": "LowerTorso", "parent": "HumanoidRootPart", "head": [0.0, 0.0, 0.70], "tail": [0.0, 0.0, 0.90], "roll": 0.0, "rbx_studs_offset": [0.0, -0.50, 0.0]},
+    {"name": "UpperTorso", "parent": "LowerTorso", "head": [0.0, 0.0, 0.90], "tail": [0.0, 0.0, 1.10], "roll": 0.0, "rbx_studs_offset": [0.0, 0.77, 0.0]},
+    {"name": "Head", "parent": "UpperTorso", "head": [0.0, 0.0, 1.35], "tail": [0.0, 0.0, 1.55], "roll": 0.0, "rbx_studs_offset": [0.0, 1.74, 0.0]},
+    {"name": "LeftUpperArm", "parent": "UpperTorso", "head": [0.28, 0.0, 1.30], "tail": [0.28, 0.0, 1.50], "roll": 0.0, "rbx_studs_offset": [-1.50, 0.55, 0.0]},
+    {"name": "LeftLowerArm", "parent": "LeftUpperArm", "head": [0.28, 0.0, 1.00], "tail": [0.28, 0.0, 1.20], "roll": 0.0, "rbx_studs_offset": [0.0, -0.95, 0.0]},
+    {"name": "LeftHand", "parent": "LeftLowerArm", "head": [0.28, 0.0, 0.72], "tail": [0.28, 0.0, 0.92], "roll": 0.0, "rbx_studs_offset": [0.0, -0.82, 0.0], "virtual_tips_rbx_local": {"LeftHandPinky3": [0.0, -0.75, 0.0]}},
+    {"name": "RightUpperArm", "parent": "UpperTorso", "head": [-0.28, 0.0, 1.30], "tail": [-0.28, 0.0, 1.50], "roll": 0.0, "rbx_studs_offset": [1.50, 0.55, 0.0]},
+    {"name": "RightLowerArm", "parent": "RightUpperArm", "head": [-0.28, 0.0, 1.00], "tail": [-0.28, 0.0, 1.20], "roll": 0.0, "rbx_studs_offset": [0.0, -0.95, 0.0]},
+    {"name": "RightHand", "parent": "RightLowerArm", "head": [-0.28, 0.0, 0.72], "tail": [-0.28, 0.0, 0.92], "roll": 0.0, "rbx_studs_offset": [0.0, -0.82, 0.0], "virtual_tips_rbx_local": {"RightHandPinky3": [0.0, -0.75, 0.0]}},
+    {"name": "LeftUpperLeg", "parent": "LowerTorso", "head": [0.12, 0.0, 0.70], "tail": [0.12, 0.0, 0.90], "roll": 0.0, "rbx_studs_offset": [-0.50, -0.35, 0.0]},
+    {"name": "LeftLowerLeg", "parent": "LeftUpperLeg", "head": [0.12, 0.0, 0.38], "tail": [0.12, 0.0, 0.58], "roll": 0.0, "rbx_studs_offset": [0.0, -0.95, 0.0]},
+    {"name": "LeftFoot", "parent": "LeftLowerLeg", "head": [0.12, 0.0, 0.08], "tail": [0.12, 0.0, 0.28], "roll": 0.0, "rbx_studs_offset": [0.0, -0.75, 0.0], "foot_half_extents_rbx": [0.45, 0.15, 0.50], "virtual_tips_rbx_local": {"LeftFootSoleFront": [0.0, -0.15, -0.50], "LeftFootSoleBack": [0.0, -0.15, 0.50]}},
+    {"name": "RightUpperLeg", "parent": "LowerTorso", "head": [-0.12, 0.0, 0.70], "tail": [-0.12, 0.0, 0.90], "roll": 0.0, "rbx_studs_offset": [0.50, -0.35, 0.0]},
+    {"name": "RightLowerLeg", "parent": "RightUpperLeg", "head": [-0.12, 0.0, 0.38], "tail": [-0.12, 0.0, 0.58], "roll": 0.0, "rbx_studs_offset": [0.0, -0.95, 0.0]},
+    {"name": "RightFoot", "parent": "RightLowerLeg", "head": [-0.12, 0.0, 0.08], "tail": [-0.12, 0.0, 0.28], "roll": 0.0, "rbx_studs_offset": [0.0, -0.75, 0.0], "foot_half_extents_rbx": [0.45, 0.15, 0.50], "virtual_tips_rbx_local": {"RightFootSoleFront": [0.0, -0.15, -0.50], "RightFootSoleBack": [0.0, -0.15, 0.50]}}
+  ]
+}

@@ -1,0 +1,35 @@
+# Python & environments
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+src/*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Build & release artifacts
+build/
+dist/
+packaging/animforge.ico
+*.spec.bak
+
+# Runtime caches & logs
+.animforge_cache.json
+*.log
+
+# Third-party addon excluded from public redistribution (Custom License v1.1)
+# Users provide their own copy via --addon-dir, ANIMFORGE_ADDON_DIR, or Blender's addons folder.
+vendor/Blender-XFBIN-Importer/
+
+# Local development working notes
+FINDINGS_AND_PLAN.md
+DEVIATIONS.md
+
+# OS / IDE clutter
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

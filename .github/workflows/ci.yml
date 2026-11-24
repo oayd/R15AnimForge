@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Create virtual environment & install dependencies
+        shell: pwsh
+        run: |
+          python -m venv .venv
+          .\.venv\Scripts\python.exe -m pip install --upgrade pip
+          .\.venv\Scripts\python.exe -m pip install numpy pytest pyinstaller -e .
+
+      - name: Run unit tests
+        shell: pwsh
+        run: |
+          .\.venv\Scripts\pytest.exe -v
+
+      - name: Build portable AnimForge.exe (unsigned CI check)
+        shell: pwsh
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\packaging\build.ps1 -SkipTests
+          .\dist\AnimForge\AnimForge.exe selftest --json
+
+      - name: Upload CI build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AnimForge-win64-ci
+          path: dist/AnimForge/AnimForge.exe
+          if-no-files-found: error

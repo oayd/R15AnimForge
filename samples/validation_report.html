@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>R15 AnimForge Validation Report</title>
+<style>
+body{font-family:Segoe UI,Arial,sans-serif;background:#11161d;color:#e7edf5;margin:24px}
+.summary{display:flex;gap:16px;margin-bottom:20px}
+.card{background:#1a222d;padding:12px 18px;border-radius:8px;border:1px solid #2b3748}
+table{width:100%;border-collapse:collapse;background:#171e27;font-size:13px}
+th,td{padding:8px 10px;border-bottom:1px solid #283242;text-align:left;vertical-align:top}
+th{background:#1f2937;position:sticky;top:0}
+.badge{padding:2px 8px;border-radius:4px;font-weight:700;font-size:11px}
+.pass{background:#14532d;color:#bbf7d0}
+.warn{background:#713f12;color:#fef08a}
+.fail{background:#7f1d1d;color:#fecaca}
+</style></head><body>
+<h1>R15 AnimForge — Roblox Upload Validation Report</h1>
+<div class="summary">
+<div class="card">Total: <strong>9</strong></div>
+<div class="card">PASS: <strong>3</strong></div>
+<div class="card">WARN: <strong>0</strong></div>
+<div class="card">FAIL: <strong>6</strong></div>
+</div>
+<table><thead><tr><th>Clip</th><th>Status</th><th>Length</th><th>Peak Speed (studs/s)</th><th>Peak Ang Vel (deg/s)</th><th>Max Foot Depth (studs)</th><th>Findings</th></tr></thead>
+<tbody><tr><td>Rohan_R15_4rhn01_atk_2h</td><td><span class='badge fail'>FAIL</span></td><td>1.208s (30f)</td><td>109.26 (RightHandPinky3)</td><td>4000 (RightHand)</td><td>0.835</td><td><strong>[V03 FAIL]</strong> Body point &#x27;RightHandPinky3&#x27; speed 109.26 studs/s exceeds 51.00 max.<br><strong>[V04 WARN]</strong> Joint &#x27;RightHand&#x27; angular velocity 4000 deg/s exceeds heuristic 1750 deg/s.<br><strong>[V05 FAIL]</strong> LeftFoot dips 0.835 studs below floor at t=0.24s (max 0.10).<br><strong>[V09 WARN]</strong> Body point &#x27;LeftHandPinky3&#x27; at Y=-3.58 &lt; -3.1 studs from HRP.</td></tr><tr><td>Rohan_R15_4rhn01_bas_nut</td><td><span class='badge fail'>FAIL</span></td><td>2.542s (62f)</td><td>0.23 (LeftHandPinky3)</td><td>17 (RightHand)</td><td>0.199</td><td><strong>[V05 FAIL]</strong> LeftFoot dips 0.199 studs below floor at t=0.79s (max 0.10).</td></tr><tr><td>Rohan_R15_4rhn01_bas_walk_front</td><td><span class='badge fail'>FAIL</span></td><td>1.542s (38f)</td><td>8.31 (RightFootSoleFront)</td><td>442 (RightFoot)</td><td>0.288</td><td><strong>[V05 FAIL]</strong> RightFoot dips 0.288 studs below floor at t=0.69s (max 0.10).</td></tr><tr><td>Rohan_R15_4rhn01_bas_dash_front</td><td><span class='badge fail'>FAIL</span></td><td>0.625s (16f)</td><td>56.62 (RightHandPinky3)</td><td>1945 (RightHand)</td><td>0.464</td><td><strong>[V03 FAIL]</strong> Body point &#x27;RightHandPinky3&#x27; speed 56.62 studs/s exceeds 51.00 max.<br><strong>[V04 WARN]</strong> Joint &#x27;RightHand&#x27; angular velocity 1945 deg/s exceeds heuristic 1750 deg/s.<br><strong>[V05 FAIL]</strong> LeftFoot dips 0.464 studs below floor at t=0.06s (max 0.10).<br><strong>[V09 WARN]</strong> Body point &#x27;LeftFootSoleFront&#x27; at Y=-3.13 &lt; -3.1 studs from HRP.</td></tr><tr><td>Rohan_R15_4rhn01_fce_nut_01</td><td><span class='badge fail'>FAIL</span></td><td>2.542s (62f)</td><td>0.00 ()</td><td>0 ()</td><td>-0.885</td><td><strong>[V02 FAIL]</strong> Curve Animation does not contain any joint manipulation (e.g., face-only or static).</td></tr><tr><td>Rohan_R15_4rhn01_bas_nut_st_idle_loop</td><td><span class='badge pass'>PASS</span></td><td>3.750s (91f)</td><td>0.28 (LeftHandPinky3)</td><td>9 (LeftHand)</td><td>0.035</td><td>All checked rules passed.</td></tr><tr><td>Rohan_R15_4rhn01_alt_idle_look</td><td><span class='badge pass'>PASS</span></td><td>5.000s (121f)</td><td>1.03 (LeftHandPinky3)</td><td>78 (Head)</td><td>0.024</td><td>All checked rules passed.</td></tr><tr><td>Rohan_R15_Jump</td><td><span class='badge fail'>FAIL</span></td><td>1.458s (36f)</td><td>32.54 (LeftHandPinky3)</td><td>961 (LeftUpperArm)</td><td>0.439</td><td><strong>[V05 FAIL]</strong> RightFoot dips 0.439 studs below floor at t=0.43s (max 0.10).<br><strong>[V09 WARN]</strong> Body point &#x27;RightFootSoleFront&#x27; at Y=-3.11 &lt; -3.1 studs from HRP.</td></tr><tr><td>Rohan_R15_Fall</td><td><span class='badge pass'>PASS</span></td><td>1.458s (36f)</td><td>1.02 (RightHandPinky3)</td><td>44 (RightUpperArm)</td><td>-0.808</td><td>All checked rules passed.</td></tr></tbody></table></body></html>

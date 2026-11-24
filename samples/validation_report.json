@@ -1,0 +1,317 @@
+{
+  "summary": {
+    "total": 9,
+    "PASS": 3,
+    "WARN": 0,
+    "FAIL": 6
+  },
+  "clips": [
+    {
+      "clip_name": "Rohan_R15_4rhn01_atk_2h",
+      "source_path": "C:\\SampleData\\Exported_R15_FBX\\Rohan_R15_4rhn01_atk_2h.fbx",
+      "status": "FAIL",
+      "duration_sec": 1.2083,
+      "frame_count": 30,
+      "loop": true,
+      "is_face_only_or_static": false,
+      "peak_speed_studs_s": 109.26,
+      "peak_speed_part": "RightHandPinky3",
+      "peak_speed_time_s": 0.114,
+      "peak_ang_vel_deg_s": 4000.4,
+      "peak_ang_vel_part": "RightHand",
+      "max_foot_depth_studs": 0.835,
+      "max_non_lt_trans_studs": 0.0,
+      "max_joint_angle_deg": 149.2,
+      "lowest_body_y_studs": -3.578,
+      "findings": [
+        {
+          "rule_id": "V03",
+          "severity": "FAIL",
+          "kind": "measured",
+          "message": "Body point 'RightHandPinky3' speed 109.26 studs/s exceeds 51.00 max.",
+          "time_sec": 0.1142857142857143,
+          "body_part": "RightHandPinky3",
+          "measured_value": 109.25907960939277,
+          "threshold": 51.0
+        },
+        {
+          "rule_id": "V04",
+          "severity": "WARN",
+          "kind": "heuristic",
+          "message": "Joint 'RightHand' angular velocity 4000 deg/s exceeds heuristic 1750 deg/s.",
+          "time_sec": 0.3714285714285715,
+          "body_part": "RightHand",
+          "measured_value": 4000.4311286679504,
+          "threshold": 1750.0
+        },
+        {
+          "rule_id": "V05",
+          "severity": "FAIL",
+          "kind": "measured",
+          "message": "LeftFoot dips 0.835 studs below floor at t=0.24s (max 0.10).",
+          "time_sec": 0.2428571428571429,
+          "body_part": "LeftFoot",
+          "measured_value": 0.8352352415563242,
+          "threshold": 0.1
+        },
+        {
+          "rule_id": "V09",
+          "severity": "WARN",
+          "kind": "unverified_soft",
+          "message": "Body point 'LeftHandPinky3' at Y=-3.58 < -3.1 studs from HRP.",
+          "time_sec": 0.0,
+          "body_part": "LeftHandPinky3",
+          "measured_value": -3.578093781456972,
+          "threshold": -3.1
+        }
+      ]
+    },
+    {
+      "clip_name": "Rohan_R15_4rhn01_bas_nut",
+      "source_path": "C:\\SampleData\\Exported_R15_FBX\\Rohan_R15_4rhn01_bas_nut.fbx",
+      "status": "FAIL",
+      "duration_sec": 2.5417,
+      "frame_count": 62,
+      "loop": true,
+      "is_face_only_or_static": false,
+      "peak_speed_studs_s": 0.23,
+      "peak_speed_part": "LeftHandPinky3",
+      "peak_speed_time_s": 2.4,
+      "peak_ang_vel_deg_s": 17.2,
+      "peak_ang_vel_part": "RightHand",
+      "max_foot_depth_studs": 0.199,
+      "max_non_lt_trans_studs": 0.0,
+      "max_joint_angle_deg": 131.2,
+      "lowest_body_y_studs": -2.885,
+      "findings": [
+        {
+          "rule_id": "V05",
+          "severity": "FAIL",
+          "kind": "measured",
+          "message": "LeftFoot dips 0.199 studs below floor at t=0.79s (max 0.10).",
+          "time_sec": 0.7857142857142848,
+          "body_part": "LeftFoot",
+          "measured_value": 0.19918912501362573,
+          "threshold": 0.1
+        }
+      ]
+    },
+    {
+      "clip_name": "Rohan_R15_4rhn01_bas_walk_front",
+      "source_path": "C:\\SampleData\\Exported_R15_FBX\\Rohan_R15_4rhn01_bas_walk_front.fbx",
+      "status": "FAIL",
+      "duration_sec": 1.5417,
+      "frame_count": 38,
+      "loop": true,
+      "is_face_only_or_static": false,
+      "peak_speed_studs_s": 8.31,
+      "peak_speed_part": "RightFootSoleFront",
+      "peak_speed_time_s": 0.857,
+      "peak_ang_vel_deg_s": 442.5,
+      "peak_ang_vel_part": "RightFoot",
+      "max_foot_depth_studs": 0.288,
+      "max_non_lt_trans_studs": 0.0,
+      "max_joint_angle_deg": 84.6,
+      "lowest_body_y_studs": -2.979,
+      "findings": [
+        {
+          "rule_id": "V05",
+          "severity": "FAIL",
+          "kind": "measured",
+          "message": "RightFoot dips 0.288 studs below floor at t=0.69s (max 0.10).",
+          "time_sec": 0.6857142857142852,
+          "body_part": "RightFoot",
+          "measured_value": 0.28836000001149564,
+          "threshold": 0.1
+        }
+      ]
+    },
+    {
+      "clip_name": "Rohan_R15_4rhn01_bas_dash_front",
+      "source_path": "C:\\SampleData\\Exported_R15_FBX\\Rohan_R15_4rhn01_bas_dash_front.fbx",
+      "status": "FAIL",
+      "duration_sec": 0.625,
+      "frame_count": 16,
+      "loop": true,
+      "is_face_only_or_static": false,
+      "peak_speed_studs_s": 56.62,
+      "peak_speed_part": "RightHandPinky3",
+      "peak_speed_time_s": 0.071,
+      "peak_ang_vel_deg_s": 1944.8,
+      "peak_ang_vel_part": "RightHand",
+      "max_foot_depth_studs": 0.464,
+      "max_non_lt_trans_studs": 0.0,
+      "max_joint_angle_deg": 136.4,
+      "lowest_body_y_studs": -3.132,
+      "findings": [
+        {
+          "rule_id": "V03",
+          "severity": "FAIL",
+          "kind": "measured",
+          "message": "Body point 'RightHandPinky3' speed 56.62 studs/s exceeds 51.00 max.",
+          "time_sec": 0.07142857142857142,
+          "body_part": "RightHandPinky3",
+          "measured_value": 56.62310009755462,
+          "threshold": 51.0
+        },
+        {
+          "rule_id": "V04",
+          "severity": "WARN",
+          "kind": "heuristic",
+          "message": "Joint 'RightHand' angular velocity 1945 deg/s exceeds heuristic 1750 deg/s.",
+          "time_sec": 0.28571428571428575,
+          "body_part": "RightHand",
+          "measured_value": 1944.8017874210705,
+          "threshold": 1750.0
+        },
+        {
+          "rule_id": "V05",
+          "severity": "FAIL",
+          "kind": "measured",
+          "message": "LeftFoot dips 0.464 studs below floor at t=0.06s (max 0.10).",
+          "time_sec": 0.05714285714285714,
+          "body_part": "LeftFoot",
+          "measured_value": 0.46392347229693076,
+          "threshold": 0.1
+        },
+        {
+          "rule_id": "V09",
+          "severity": "WARN",
+          "kind": "unverified_soft",
+          "message": "Body point 'LeftFootSoleFront' at Y=-3.13 < -3.1 studs from HRP.",
+          "time_sec": 0.05714285714285714,
+          "body_part": "LeftFootSoleFront",
+          "measured_value": -3.1319753237613916,
+          "threshold": -3.1
+        }
+      ]
+    },
+    {
+      "clip_name": "Rohan_R15_4rhn01_fce_nut_01",
+      "source_path": "C:\\SampleData\\Exported_R15_FBX\\Rohan_R15_4rhn01_fce_nut_01.fbx",
+      "status": "FAIL",
+      "duration_sec": 2.5417,
+      "frame_count": 62,
+      "loop": true,
+      "is_face_only_or_static": true,
+      "peak_speed_studs_s": 0.0,
+      "peak_speed_part": "",
+      "peak_speed_time_s": 0.0,
+      "peak_ang_vel_deg_s": 0.0,
+      "peak_ang_vel_part": "",
+      "max_foot_depth_studs": -0.885,
+      "max_non_lt_trans_studs": 0.0,
+      "max_joint_angle_deg": 139.2,
+      "lowest_body_y_studs": -1.979,
+      "findings": [
+        {
+          "rule_id": "V02",
+          "severity": "FAIL",
+          "kind": "measured",
+          "message": "Curve Animation does not contain any joint manipulation (e.g., face-only or static).",
+          "time_sec": null,
+          "body_part": null,
+          "measured_value": 4.2146848510894035e-08,
+          "threshold": 0.001
+        }
+      ]
+    },
+    {
+      "clip_name": "Rohan_R15_4rhn01_bas_nut_st_idle_loop",
+      "source_path": "C:\\SampleData\\Exported_R15_FBX\\Rohan_R15_4rhn01_bas_nut_st_idle_loop.fbx",
+      "status": "PASS",
+      "duration_sec": 3.75,
+      "frame_count": 91,
+      "loop": true,
+      "is_face_only_or_static": false,
+      "peak_speed_studs_s": 0.28,
+      "peak_speed_part": "LeftHandPinky3",
+      "peak_speed_time_s": 0.286,
+      "peak_ang_vel_deg_s": 9.1,
+      "peak_ang_vel_part": "LeftHand",
+      "max_foot_depth_studs": 0.035,
+      "max_non_lt_trans_studs": 0.0,
+      "max_joint_angle_deg": 80.9,
+      "lowest_body_y_studs": -2.732,
+      "findings": []
+    },
+    {
+      "clip_name": "Rohan_R15_4rhn01_alt_idle_look",
+      "source_path": "C:\\SampleData\\Exported_R15_FBX\\Rohan_R15_4rhn01_alt_idle_look.fbx",
+      "status": "PASS",
+      "duration_sec": 5.0,
+      "frame_count": 121,
+      "loop": true,
+      "is_face_only_or_static": false,
+      "peak_speed_studs_s": 1.03,
+      "peak_speed_part": "LeftHandPinky3",
+      "peak_speed_time_s": 2.771,
+      "peak_ang_vel_deg_s": 78.0,
+      "peak_ang_vel_part": "Head",
+      "max_foot_depth_studs": 0.024,
+      "max_non_lt_trans_studs": 0.0,
+      "max_joint_angle_deg": 80.8,
+      "lowest_body_y_studs": -2.725,
+      "findings": []
+    },
+    {
+      "clip_name": "Rohan_R15_Jump",
+      "source_path": "C:\\SampleData\\Exported_R15_FBX\\Rohan_R15_Jump.fbx",
+      "status": "FAIL",
+      "duration_sec": 1.4583,
+      "frame_count": 36,
+      "loop": false,
+      "is_face_only_or_static": false,
+      "peak_speed_studs_s": 32.54,
+      "peak_speed_part": "LeftHandPinky3",
+      "peak_speed_time_s": 0.371,
+      "peak_ang_vel_deg_s": 961.4,
+      "peak_ang_vel_part": "LeftUpperArm",
+      "max_foot_depth_studs": 0.439,
+      "max_non_lt_trans_studs": 0.0,
+      "max_joint_angle_deg": 173.6,
+      "lowest_body_y_studs": -3.115,
+      "findings": [
+        {
+          "rule_id": "V05",
+          "severity": "FAIL",
+          "kind": "measured",
+          "message": "RightFoot dips 0.439 studs below floor at t=0.43s (max 0.10).",
+          "time_sec": 0.42857142857142866,
+          "body_part": "RightFoot",
+          "measured_value": 0.43913807001253335,
+          "threshold": 0.1
+        },
+        {
+          "rule_id": "V09",
+          "severity": "WARN",
+          "kind": "unverified_soft",
+          "message": "Body point 'RightFootSoleFront' at Y=-3.11 < -3.1 studs from HRP.",
+          "time_sec": 0.42857142857142866,
+          "body_part": "RightFootSoleFront",
+          "measured_value": -3.1148903486047814,
+          "threshold": -3.1
+        }
+      ]
+    },
+    {
+      "clip_name": "Rohan_R15_Fall",
+      "source_path": "C:\\SampleData\\Exported_R15_FBX\\Rohan_R15_Fall.fbx",
+      "status": "PASS",
+      "duration_sec": 1.4583,
+      "frame_count": 36,
+      "loop": true,
+      "is_face_only_or_static": false,
+      "peak_speed_studs_s": 1.02,
+      "peak_speed_part": "RightHandPinky3",
+      "peak_speed_time_s": 0.229,
+      "peak_ang_vel_deg_s": 44.4,
+      "peak_ang_vel_part": "RightUpperArm",
+      "max_foot_depth_studs": -0.808,
+      "max_non_lt_trans_studs": 0.0,
+      "max_joint_angle_deg": 145.2,
+      "lowest_body_y_studs": -1.885,
+      "findings": []
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "notes": "Verified against Roblox Studio UGCValidation Lua source (version-8d7a1009c17e4ff8) and live Roblox Avatar Item Category validator outputs.",
+  "rules": [
+    {
+      "id": "V01",
+      "name": "Curve Types Allowed",
+      "threshold": ["MarkerCurve", "AnimationRigData", "Folder", "Vector3Curve", "EulerRotationCurve", "FloatCurve"],
+      "severity": "FAIL",
+      "kind": "measured",
+      "source": "UGCValidation/CurveAnimAllowedTypes.lua & CurveAnimStrictSchema.lua (Studio Studio Post-Process enforces this; FBX is converted cleanly in Studio).",
+      "description": "Only MarkerCurve, AnimationRigData, Folder, Vector3Curve, EulerRotationCurve, and FloatCurve are allowed in CurveAnimation. Quaternion RotationCurve instances are rejected."
+    },
+    {
+      "id": "V02",
+      "name": "Joint Manipulation Present",
+      "threshold": 0.001,
+      "severity": "FAIL",
+      "kind": "measured",
+      "source": "UGCValidation/CurveAnimJointsAnimated.lua & CurveAnimJointsManipulated.lua",
+      "description": "At least one of the 15 mapped joints must have non-constant rotational motion (rotation delta >= 0.001 rad) or Roblox fails with 'Curve Animation does not contain any joint manipulation'."
+    },
+    {
+      "id": "V03",
+      "name": "Max Body Part & Virtual Tip Linear Speed",
+      "threshold": 51.0,
+      "auto_fix_target": 45.0,
+      "sample_rates_fps": [30, 70],
+      "severity": "FAIL",
+      "kind": "measured",
+      "source": "Roblox Avatar Validator (Roxie reference rig: LeftHandPinky3 57.94, RightHandPinky3 51.39 vs 51.00 max) & UGCValidation/CurveAnimSpeedBounded.lua",
+      "description": "No body part center or virtual hand/foot tip may exceed 51.0 studs/s relative to HumanoidRootPart when sampled at 30 fps and 70 fps. Auto-fix targets <= 45.0 studs/s to account for Roxie rig variance."
+    },
+    {
+      "id": "V04",
+      "name": "Max Joint Angular Velocity (Heuristic)",
+      "threshold": 1750.0,
+      "severity": "WARN",
+      "kind": "heuristic",
+      "source": "UGCValidation/flags/getFIntUGCValidationMaxAnimationRotationSpeedPerSecond.lua (default 1750 deg/s)",
+      "description": "Heuristic angular speed warning when any joint rotates faster than 1750 deg/s between sampled frames."
+    },
+    {
+      "id": "V05",
+      "name": "Max Floor Penetration Depth",
+      "threshold": 0.10,
+      "auto_fix_margin": 0.02,
+      "severity": "FAIL",
+      "kind": "measured",
+      "source": "Roblox Avatar Validator on Roxie reference avatar ('0.13 studs below the floor at 0.00 seconds. The allowed depth is 0.1 studs')",
+      "description": "No foot bounding corner may drop more than 0.10 studs below the standing floor plane at any sampled timestamp."
+    },
+    {
+      "id": "V06",
+      "name": "Non-LowerTorso Translation Limit",
+      "threshold": 0.30,
+      "severity": "FAIL",
+      "kind": "measured",
+      "source": "UGCValidation/CurveAnimPositionBounded.lua & GetFStringUGCValidateMaxAnimationMovement.lua (0.3 studs)",
+      "description": "Only LowerTorso may translate; all other 14 joints must have <= 0.30 studs translation (default auto-fix strips all non-LowerTorso translation to 0)."
+    },
+    {
+      "id": "V07",
+      "name": "Key Spacing / Frame Rate Bounds",
+      "threshold": 70.0,
+      "min_dt_sec": 0.0142857,
+      "severity": "FAIL",
+      "kind": "measured",
+      "source": "UGCValidation/CurveAnimNumericalDataValid.lua (UGCValidateMaxAnimationFPS = 70)",
+      "description": "Adjacent keyframes cannot be closer than 1/70 s, and total animation length must be in (0, 10.0] s."
+    },
+    {
+      "id": "V08",
+      "name": "Max Joint Angle From Rest",
+      "threshold": 180.0,
+      "severity": "FAIL",
+      "kind": "measured",
+      "source": "UGCValidation/CurveAnimJointRotationLimited.lua (UGCValidateMaxJointRotation = '180')",
+      "description": "Every joint rotation from rest pose must remain <= 180 degrees at every sample."
+    },
+    {
+      "id": "V09",
+      "name": "Lowest Body Point Height (Soft)",
+      "threshold": -3.1,
+      "max_distance": 25.0,
+      "severity": "WARN",
+      "kind": "unverified_soft",
+      "source": "UGCValidation/CurveAnimBoundsValid.lua (UGCValidateAnimationHeightTol = '-3.1', MaxAnimationBounds = '25')",
+      "description": "Soft check that no body part drops below -3.1 studs from HumanoidRootPart or travels farther than 25.0 studs."
+    },
+    {
+      "id": "V10",
+      "name": "Animation Pack Manifest Schema",
+      "threshold": 1,
+      "severity": "FAIL",
+      "kind": "measured",
+      "source": "UGCValidation/validation/validateAnimationBundleReadyForUpload.lua & live duplicate FallAnim error",
+      "description": "Each animation slot container must have exact StringValue names and exact Animation child count (1 per slot, 2 for idle)."
+    },
+    {
+      "id": "V11",
+      "name": "Loop Seam Continuity",
+      "threshold": 0.015,
+      "velocity_jump_ratio": 3.0,
+      "severity": "WARN",
+      "kind": "measured",
+      "source": "UGCValidation/CurveAnimLoopingRequired.lua & seam continuity checks",
+      "description": "For looping clips, first and last poses should match within angle/position tolerance without velocity discontinuity across the wrap."
+    },
+    {
+      "id": "V12",
+      "name": "Numerical & Curve Sanity",
+      "threshold": 1e-3,
+      "severity": "FAIL",
+      "kind": "measured",
+      "source": "UGCValidation/CurveAnimNumericalDataValid.lua & CurveAnimFrameDataSensible.lua",
+      "description": "Rejects NaN/Inf values, empty tracks, non-monotonic key times, and non-unit quaternions."
+    }
+  ],
+  "pack_schema": {
+    "IdleAnimation": {"r15_folder": "R15Anim", "string_value": "idle", "children": ["Animation1", "Animation2"], "loop": true},
+    "WalkAnimation": {"r15_folder": "R15Anim", "string_value": "walk", "children": ["WalkAnim"], "loop": true},
+    "RunAnimation": {"r15_folder": "R15Anim", "string_value": "run", "children": ["RunAnim"], "loop": true},
+    "JumpAnimation": {"r15_folder": "R15Anim", "string_value": "jump", "children": ["JumpAnim"], "loop": false},
+    "FallAnimation": {"r15_folder": "R15Anim", "string_value": "fall", "children": ["FallAnim"], "loop": true},
+    "ClimbAnimation": {"r15_folder": "R15Anim", "string_value": "climb", "children": ["ClimbAnim"], "loop": true},
+    "SwimAnimation": {
+      "r15_folder": "R15Anim",
+      "string_values": {
+        "swim": ["SwimAnim"],
+        "swimidle": ["SwimIdleAnim"]
+      },
+      "loop": true
+    }
+  }
+}
