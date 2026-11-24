@@ -49,6 +49,6 @@ powershell -ExecutionPolicy Bypass -File .\packaging\build.ps1
 
 Free code signing provided by [SignPath.io](https://signpath.io/), certificate by [SignPath Foundation](https://signpath.org/).
 
-- **Team Roles**: Committers, Reviewers, and Approvers: `@oayd` (with mandatory Multi-Factor Authentication enabled on GitHub and SignPath). Release binaries are built exclusively on GitHub-hosted runners (`.github/workflows/release.yml`) from tagged commits before signing.
+- **Team Roles**: Committers, Reviewers, and Approvers are the repository maintainers (with mandatory Multi-Factor Authentication enabled on GitHub and SignPath). Release binaries are built exclusively on GitHub-hosted runners (`.github/workflows/release.yml`) from tagged commits before signing.
 - **Privacy Policy**: This program will not transfer any information to other networked systems unless specifically requested by the user or the person installing or operating it. R15 AnimForge operates 100% offline with zero telemetry.
 - **Verification & Security**: See [`SECURITY.md`](SECURITY.md) for Authenticode, SHA-256, and GitHub Build Provenance Attestation verification instructions.
