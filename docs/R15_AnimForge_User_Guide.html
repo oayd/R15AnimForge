@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>R15 AnimForge v1.0.0 — Technical Report &amp; User Guide</title>
+<title>R15 AnimForge — User Guide (v1.0.0)</title>
 <style>
   @page {
     size: letter portrait;
@@ -11,52 +11,43 @@
 
   * {
     box-sizing: border-box;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
+    margin: 0;
+    padding: 0;
   }
 
   :root {
-    --bg: #111318;
-    --page-bg: #14171D;
-    --surface: #1B1F27;
-    --surface-alt: #222732;
-    --well: #0E1015;
-    --border: #2D3442;
-    --border-soft: #242A36;
-    --accent: #3B82F6;
-    --accent-soft: rgba(59, 130, 246, 0.14);
-    --fg: #E6EAF0;
-    --fg-muted: #9AA3B2;
-    --fg-dim: #6E7787;
+    --bg: #111317;
+    --surface: #181B21;
+    --surface-soft: #14171C;
+    --border: #262B35;
+    --text: #E6EAF0;
+    --muted: #9BA3B0;
+    --dim: #6C7484;
+    --accent: #60A5FA;
     --ok: #34D399;
-    --ok-bg: rgba(52, 211, 153, 0.13);
     --warn: #FBBF24;
-    --warn-bg: rgba(251, 191, 36, 0.13);
     --fail: #F87171;
-    --fail-bg: rgba(248, 113, 113, 0.14);
   }
 
   html, body {
-    margin: 0;
-    padding: 0;
-    background: var(--page-bg);
-    color: var(--fg);
+    background: var(--bg);
+    color: var(--text);
     font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 8.6pt;
-    line-height: 1.38;
+    font-size: 9.7pt;
+    line-height: 1.5;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   .page {
     width: 8.5in;
     height: 11in;
-    padding: 0.42in 0.5in 0.36in 0.5in;
-    background: var(--page-bg);
+    padding: 0.60in 0.62in 0.56in 0.62in;
+    background: var(--bg);
     position: relative;
+    overflow: hidden;
     page-break-after: always;
     break-after: page;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
   }
 
   .page:last-child {
@@ -64,1167 +55,895 @@
     break-after: auto;
   }
 
-  .page-header {
+  .page-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-bottom: 8px;
+    margin-bottom: 18px;
     border-bottom: 1px solid var(--border);
-    padding-bottom: 5px;
-    margin-bottom: 11px;
-    font-size: 7.5pt;
-    color: var(--fg-dim);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    font-size: 8.5pt;
+    color: var(--dim);
   }
 
-  .page-header strong {
-    color: var(--fg-muted);
+  .page-top strong {
+    color: var(--muted);
     font-weight: 600;
   }
 
-  .page-footer {
-    margin-top: auto;
-    padding-top: 7px;
-    border-top: 1px solid var(--border-soft);
+  .page-foot {
+    position: absolute;
+    left: 0.62in;
+    right: 0.62in;
+    bottom: 0.34in;
     display: flex;
     justify-content: space-between;
-    font-size: 7.4pt;
-    color: var(--fg-dim);
+    border-top: 1px solid var(--border);
+    padding-top: 7px;
+    font-size: 8.2pt;
+    color: var(--dim);
+  }
+
+  h1 {
+    font-size: 17pt;
+    font-weight: 600;
+    color: #F3F6FA;
+    letter-spacing: -0.015em;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-size: 11.2pt;
+    font-weight: 600;
+    color: var(--text);
+    margin: 16px 0 8px 0;
+  }
+
+  p {
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .lead {
+    font-size: 10.2pt;
+    color: var(--muted);
+    line-height: 1.52;
+    margin-bottom: 14px;
+  }
+
+  code, pre {
+    font-family: "Cascadia Mono", Consolas, monospace;
+  }
+
+  code {
+    background: #1D2129;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 0.5px 5px;
+    font-size: 8.6pt;
+    color: #C7DBFF;
+  }
+
+  pre {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-size: 8.3pt;
+    line-height: 1.5;
+    color: #DCE3EE;
+    white-space: pre-wrap;
+    margin: 10px 0 12px 0;
+  }
+
+  .cmd-note {
+    color: #7D8799;
   }
 
   /* Cover */
-  .cover {
-    background: radial-gradient(circle at 82% 14%, rgba(59, 130, 246, 0.14), transparent 44%),
-                linear-gradient(180deg, #12151B 0%, #151921 100%);
-    justify-content: space-between;
-  }
-
-  .cover-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 8pt;
-    color: var(--fg-muted);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+  .cover-head {
+    padding-bottom: 14px;
     border-bottom: 1px solid var(--border);
-    padding-bottom: 9px;
+    margin-bottom: 18px;
   }
 
-  .badge-pill {
-    display: inline-block;
-    padding: 2.5px 8px;
-    border-radius: 4px;
-    font-size: 7.4pt;
-    font-weight: 600;
-    background: var(--accent-soft);
-    color: #93C5FD;
-    border: 1px solid rgba(59, 130, 246, 0.35);
-    letter-spacing: 0.04em;
-  }
-
-  .cover-hero {
-    margin-top: 14px;
-  }
-
-  .cover-kicker {
-    font-size: 8.2pt;
+  .cover-ver {
+    font-size: 9.5pt;
     font-weight: 600;
     color: var(--accent);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
 
   .cover-title {
     font-size: 28pt;
     font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
-    color: #F3F6FA;
-    margin: 0 0 8px 0;
-  }
-
-  .cover-sub {
-    font-size: 10pt;
-    color: var(--fg-muted);
-    max-width: 7.1in;
-    line-height: 1.42;
-    margin: 0 0 12px 0;
-  }
-
-  .cover-shot {
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    overflow: hidden;
-    background: var(--well);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
-    margin: 6px 0 12px 0;
-  }
-
-  .cover-shot img {
-    display: block;
-    width: 100%;
-    max-height: 4.35in;
-    object-fit: contain;
-    background: var(--well);
-  }
-
-  .meta-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+    letter-spacing: -0.025em;
+    color: #F6F8FB;
+    line-height: 1.12;
     margin-bottom: 10px;
   }
 
-  .meta-card {
-    background: var(--surface);
+  .cover-desc {
+    font-size: 10.6pt;
+    line-height: 1.55;
+    color: var(--muted);
+    max-width: 96%;
+  }
+
+  .cover-img {
+    margin: 14px 0 16px 0;
     border: 1px solid var(--border);
-    border-radius: 5px;
-    padding: 7px 9px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #0D0F13;
   }
 
-  .meta-label {
-    font-size: 7pt;
-    color: var(--fg-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 2px;
+  .cover-img img {
+    width: 100%;
+    max-height: 4.35in;
+    object-fit: contain;
+    display: block;
   }
 
-  .meta-val {
-    font-size: 8.6pt;
-    font-weight: 600;
-    color: var(--fg);
-  }
-
-  .toc-box {
+  .toc {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 6px;
-    padding: 10px 14px;
+    padding: 14px 18px;
   }
 
-  .toc-title {
-    font-size: 7.8pt;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--fg-muted);
-    font-weight: 700;
-    margin-bottom: 6px;
+  .toc h2 {
+    margin: 0 0 10px 0;
+    font-size: 10.5pt;
+    color: var(--text);
   }
 
-  .toc-grid {
+  .toc-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4px 20px;
-    font-size: 8.2pt;
+    column-gap: 28px;
+    row-gap: 7px;
+    font-size: 9.4pt;
   }
 
-  .toc-item {
+  .toc-row {
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px dotted var(--border);
-    padding-bottom: 2px;
-    color: var(--fg);
+    border-bottom: 1px solid #20252E;
+    padding-bottom: 4px;
+    color: var(--text);
   }
 
-  .toc-item span:last-child {
+  .toc-row span:last-child {
     color: var(--accent);
     font-family: Consolas, monospace;
     font-weight: 600;
   }
 
-  /* Headings & Body */
-  h1 {
-    font-size: 14.5pt;
-    font-weight: 700;
-    color: #F3F6FA;
-    margin: 0 0 6px 0;
-    letter-spacing: -0.01em;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .sec-num {
-    display: inline-block;
-    background: var(--accent-soft);
-    color: #93C5FD;
-    border: 1px solid rgba(59, 130, 246, 0.35);
-    font-family: Consolas, monospace;
-    font-size: 8.8pt;
-    padding: 1.5px 6px;
-    border-radius: 4px;
-  }
-
-  h2 {
-    font-size: 10pt;
-    font-weight: 600;
-    color: #DCE3EE;
-    margin: 9px 0 5px 0;
-    border-left: 3px solid var(--accent);
-    padding-left: 7px;
-  }
-
-  h3 {
-    font-size: 9pt;
-    font-weight: 600;
-    color: #CBD5E1;
-    margin: 7px 0 3px 0;
-  }
-
-  p {
-    margin: 0 0 6px 0;
-    color: var(--fg);
-  }
-
-  ul, ol {
-    margin: 3px 0 6px 0;
-    padding-left: 16px;
-  }
-
-  li {
-    margin-bottom: 2.5px;
-    color: var(--fg);
-  }
-
-  code {
-    font-family: Consolas, "Cascadia Mono", monospace;
-    font-size: 7.7pt;
-    background: var(--well);
-    border: 1px solid var(--border-soft);
-    color: #93C5FD;
-    padding: 0.5px 3.5px;
-    border-radius: 3px;
-  }
-
-  pre {
-    background: var(--well);
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    padding: 7px 9px;
-    margin: 4px 0 8px 0;
-    font-family: Consolas, "Cascadia Mono", monospace;
-    font-size: 7.3pt;
-    line-height: 1.38;
-    color: #D5DFEE;
-    white-space: pre-wrap;
-    word-break: break-word;
-  }
-
-  /* Cards, Callouts, Figures */
-  .card-grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin: 6px 0 8px 0;
-  }
-
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    padding: 8px 10px;
-    font-size: 8.2pt;
-    break-inside: avoid;
-  }
-
-  .card-title {
-    font-size: 8.6pt;
-    font-weight: 700;
-    color: #F1F5F9;
-    margin-bottom: 3px;
-  }
-
-  .callout {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--accent);
-    border-radius: 4px;
-    padding: 6px 9px;
-    margin: 6px 0 7px 0;
-    font-size: 8pt;
-    break-inside: avoid;
-  }
-
-  .callout.warn {
-    border-left-color: var(--warn);
-    background: rgba(251, 191, 36, 0.06);
-  }
-
-  .callout.ok {
-    border-left-color: var(--ok);
-    background: rgba(52, 211, 153, 0.06);
-  }
-
-  .callout.fail {
-    border-left-color: var(--fail);
-    background: rgba(248, 113, 113, 0.07);
-  }
-
-  .callout strong {
-    color: #F8FAFC;
-  }
-
-  figure {
-    margin: 6px 0 8px 0;
+  /* Boxes & Lists */
+  .box {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 6px;
-    padding: 6px;
-    break-inside: avoid;
+    padding: 12px 14px;
+    margin: 10px 0;
   }
 
-  figure img {
-    display: block;
-    width: 100%;
-    max-height: 3.35in;
-    object-fit: contain;
-    background: var(--well);
-    border-radius: 3px;
-    border: 1px solid var(--well);
+  .box-title {
+    font-size: 9.8pt;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
   }
 
-  figcaption {
-    font-size: 7.5pt;
-    color: var(--fg-muted);
-    margin-top: 5px;
-    line-height: 1.32;
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 10px 0;
   }
 
-  figcaption strong {
-    color: var(--fg);
+  .note {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 5px;
+    padding: 9px 12px;
+    margin: 10px 0;
+    font-size: 9.2pt;
+    color: var(--muted);
+  }
+
+  .note strong {
+    color: var(--text);
+  }
+
+  .note.warn {
+    border-left-color: var(--warn);
+  }
+
+  .note.danger {
+    border-left-color: var(--fail);
+  }
+
+  ul, ol {
+    padding-left: 18px;
+    margin: 6px 0 10px 0;
+  }
+
+  li {
+    margin-bottom: 5px;
+    color: var(--text);
+  }
+
+  /* Steps */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 10px 0 12px 0;
+  }
+
+  .step {
+    display: flex;
+    gap: 11px;
+    align-items: flex-start;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 9px 12px;
+  }
+
+  .step-n {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #1F2D42;
+    color: #93C5FD;
+    font-size: 9pt;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .step p {
+    margin: 0;
+    font-size: 9.3pt;
   }
 
   /* Tables */
   table {
     width: 100%;
     border-collapse: collapse;
-    margin: 4px 0 7px 0;
-    font-size: 7.55pt;
-    line-height: 1.32;
+    margin: 8px 0 12px 0;
+    font-size: 8.9pt;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 5px;
+    border-radius: 6px;
     overflow: hidden;
   }
 
   th {
-    background: var(--surface-alt);
-    color: #CBD5E1;
-    font-weight: 700;
-    text-align: left;
-    padding: 4.5px 6.5px;
-    border-bottom: 1px solid var(--border);
-    font-size: 7.2pt;
+    background: #1E222A;
+    color: var(--muted);
+    font-size: 8pt;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.04em;
+    text-align: left;
+    padding: 7px 9px;
+    border-bottom: 1px solid var(--border);
   }
 
   td {
-    padding: 4px 6.5px;
-    border-bottom: 1px solid var(--border-soft);
+    padding: 6.5px 9px;
+    border-bottom: 1px solid #21252F;
     vertical-align: top;
-    color: var(--fg);
+    color: var(--text);
   }
 
   tr:last-child td {
     border-bottom: none;
   }
 
-  tr:nth-child(even) td {
-    background: rgba(255, 255, 255, 0.015);
-  }
-
-  .tag {
-    display: inline-block;
-    padding: 1px 5px;
-    border-radius: 3px;
-    font-size: 6.8pt;
-    font-weight: 700;
-    font-family: Consolas, monospace;
-    letter-spacing: 0.03em;
-  }
-
-  .tag-ok { background: var(--ok-bg); color: var(--ok); }
-  .tag-warn { background: var(--warn-bg); color: var(--warn); }
-  .tag-fail { background: var(--fail-bg); color: var(--fail); }
-  .tag-info { background: var(--accent-soft); color: #93C5FD; }
-
-  .step-box {
-    display: flex;
-    gap: 8px;
-    align-items: flex-start;
+  /* Figures */
+  figure {
+    margin: 8px 0 10px 0;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 5px;
-    padding: 6px 9px;
-    margin-bottom: 5px;
-    break-inside: avoid;
-  }
-
-  .step-num {
-    flex: 0 0 21px;
-    height: 21px;
-    border-radius: 4px;
-    background: var(--accent);
-    color: #FFFFFF;
-    font-weight: 700;
-    font-size: 8.5pt;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: Consolas, monospace;
-  }
-
-  .step-body {
-    flex: 1;
-    font-size: 8pt;
-    line-height: 1.34;
-  }
-
-  .step-body strong {
-    color: #F8FAFC;
-  }
-
-  .qbadge {
-    display: inline-block;
-    font-size: 6.5pt;
-    font-weight: 700;
-    color: #93C5FD;
-    vertical-align: super;
-    margin-left: 1px;
-  }
-
-  .svg-wrap {
-    background: var(--well);
-    border: 1px solid var(--border);
     border-radius: 6px;
-    padding: 8px;
-    margin: 6px 0 8px 0;
+    padding: 7px;
+  }
+
+  figure img {
+    width: 100%;
+    object-fit: contain;
+    display: block;
+    border-radius: 4px;
+    background: #0D0F13;
+  }
+
+  figcaption {
+    font-size: 8.5pt;
+    color: var(--muted);
+    padding: 6px 4px 2px 4px;
+    line-height: 1.4;
+  }
+
+  /* Plain status text */
+  .ok { color: var(--ok); font-weight: 600; }
+  .warn-txt { color: var(--warn); font-weight: 600; }
+  .fail { color: var(--fail); font-weight: 600; }
+  .info { color: var(--accent); font-weight: 600; }
+
+  .q {
+    display: inline-block;
+    font-size: 7.2pt;
+    font-weight: 700;
+    color: var(--dim);
+    vertical-align: super;
+    margin-left: 2px;
   }
 </style>
 </head>
 <body>
 
 <!-- ==================== PAGE 1: COVER ==================== -->
-<section class="page cover">
-  <div>
-    <div class="cover-top">
-      <span>R15 AnimForge Technical Manual &amp; Operator Reference</span>
-      <span class="badge-pill">v1.0.0 &bull; WINDOWS x64 &bull; 100% OFFLINE</span>
-    </div>
+<section class="page">
+  <div class="cover-head">
+    <div class="cover-ver">User Guide &bull; v1.0.0 &bull; Windows 10/11</div>
+    <div class="cover-title">R15 AnimForge</div>
+    <p class="cover-desc">
+      R15 AnimForge is a free, offline Windows app and command-line tool for converting JoJo ASBR / CyberConnect2 <code>.xfbin</code> character animations into Roblox R15 <code>.fbx</code> clips, building Idle/Jump/Fall loops, fixing upload errors, and preparing animations for Roblox Studio.
+    </p>
+  </div>
 
-    <div class="cover-hero">
-      <div class="cover-kicker">CyberConnect2 .XFBIN &rarr; Roblox R15 Pipeline</div>
-      <h1 class="cover-title" style="display:block;font-size:32pt;margin-bottom:10px;">R15 AnimForge</h1>
-      <p class="cover-sub">
-        A self-contained, offline Windows desktop application and CLI that converts JoJo's Bizarre Adventure: All-Star Battle R (and compatible CyberConnect2) <code>.xfbin</code> character animations into Roblox R15-ready <code>.fbx</code> clips, synthesizes cyclic Idle/Jump/Fall packs, validates against Roblox Avatar Item rules, auto-fixes issues into isolated folders, and generates Studio Luau post-processors.
-      </p>
-    </div>
+  <div class="cover-img">
+    <img src="assets/01_convert_tab.png" alt="R15 AnimForge Convert Tab">
+  </div>
 
-    <div class="cover-shot">
-      <img src="assets/01_convert_tab.png" alt="R15 AnimForge Dark Mode Workbench">
-    </div>
-
-    <div class="meta-grid">
-      <div class="meta-card">
-        <div class="meta-label">Bundled Engine</div>
-        <div class="meta-val">Blender 5.3.0 (Portable)</div>
-      </div>
-      <div class="meta-card">
-        <div class="meta-label">Character Support</div>
-        <div class="meta-val">Universal Auto-Detect</div>
-      </div>
-      <div class="meta-card">
-        <div class="meta-label">Validation Engine</div>
-        <div class="meta-val">Rules V01&ndash;V12 @ 30/70 FPS</div>
-      </div>
-      <div class="meta-card">
-        <div class="meta-label">Safety Guarantee</div>
-        <div class="meta-val">Zero Overwrites / Offline</div>
-      </div>
+  <div class="toc">
+    <h2>Contents</h2>
+    <div class="toc-list">
+      <div class="toc-row"><span>1. Getting Started &amp; Requirements</span><span>02</span></div>
+      <div class="toc-row"><span>5. Checking &amp; Fixing Upload Errors</span><span>06</span></div>
+      <div class="toc-row"><span>2. Converting Animations (Convert Tab)</span><span>03</span></div>
+      <div class="toc-row"><span>6. Roblox Studio &amp; Animation Packs</span><span>07</span></div>
+      <div class="toc-row"><span>3. Cleanup Options &amp; Loop Builders</span><span>04</span></div>
+      <div class="toc-row"><span>7. Roblox Validation Rules (V01&ndash;V12)</span><span>08</span></div>
+      <div class="toc-row"><span>4. How the Character Matcher Works</span><span>05</span></div>
+      <div class="toc-row"><span>8. Command Line &amp; Common Issues</span><span>09</span></div>
     </div>
   </div>
 
-  <div class="toc-box">
-    <div class="toc-title">Contents</div>
-    <div class="toc-grid">
-      <div class="toc-item"><span>1. Program Overview &amp; Pipeline Architecture</span><span>02</span></div>
-      <div class="toc-item"><span>5. Validate, Auto-Fix &amp; Re-validation Guide</span><span>06</span></div>
-      <div class="toc-item"><span>2. Quickstart: XFBIN to Roblox Marketplace</span><span>03</span></div>
-      <div class="toc-item"><span>6. Roblox Studio Publishing &amp; Pack Manifest</span><span>07</span></div>
-      <div class="toc-item"><span>3. Every GUI Setting &amp; Control Explained</span><span>04</span></div>
-      <div class="toc-item"><span>7. Roblox Validation Rules (V01&ndash;V12) Reference</span><span>08</span></div>
-      <div class="toc-item"><span>4. Procedural Builders &amp; Formula Matcher</span><span>05</span></div>
-      <div class="toc-item"><span>8. CLI Reference, Profiles &amp; Troubleshooting</span><span>09</span></div>
-    </div>
+  <div class="page-foot">
+    <span>R15 AnimForge v1.0.0 User Guide</span>
+    <span>Page 1</span>
   </div>
 </section>
 
-<!-- ==================== PAGE 2: OVERVIEW & ARCHITECTURE ==================== -->
+<!-- ==================== PAGE 2: GETTING STARTED ==================== -->
 <section class="page">
-  <div class="page-header">
+  <div class="page-top">
     <strong>R15 AnimForge v1.0.0</strong>
-    <span>Section 01 &bull; Overview &amp; Architecture</span>
+    <span>Getting Started</span>
   </div>
 
-  <h1><span class="sec-num">01</span> Program Overview &amp; Architecture</h1>
-  <p>
-    <strong>R15 AnimForge</strong> automates the complete conversion of CyberConnect2 <code>.xfbin</code> character archives into Roblox-ready 16-bone R15 <code>.fbx</code> animations. It runs completely offline with its own bundled portable <strong>Blender 5.3.0</strong> runtime and patched <strong>Al-Hydra Blender-XFBIN-Importer</strong>, requiring zero pre-installed Python, Blender, or network access.
+  <h1>1. Getting Started &amp; Requirements</h1>
+  <p class="lead">
+    R15 AnimForge runs completely offline on your PC. Nothing is uploaded anywhere, and it never modifies your original <code>.xfbin</code> or <code>.fbx</code> files.
   </p>
 
-  <div class="svg-wrap">
-    <svg viewBox="0 0 740 164" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-      <defs>
-        <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M 0 1 L 9 5 L 0 9 z" fill="#4B6B99"/>
-        </marker>
-      </defs>
-      <!-- Stage boxes -->
-      <rect x="6" y="18" width="110" height="74" rx="5" fill="#1B1F27" stroke="#2D3442"/>
-      <text x="61" y="37" fill="#93C5FD" font-size="9.5" font-weight="700" text-anchor="middle">1. DISCOVER</text>
-      <text x="61" y="53" fill="#E6EAF0" font-size="8.2" text-anchor="middle">Scan *.xfbin</text>
-      <text x="61" y="66" fill="#9AA3B2" font-size="7.6" text-anchor="middle">Auto Charcode</text>
-      <text x="61" y="79" fill="#9AA3B2" font-size="7.6" text-anchor="middle">CRILAYLA / NUCC</text>
-
-      <line x1="116" y1="55" x2="132" y2="55" stroke="#4B6B99" stroke-width="1.6" marker-end="url(#arr)"/>
-
-      <rect x="134" y="18" width="114" height="74" rx="5" fill="#1B1F27" stroke="#2D3442"/>
-      <text x="191" y="37" fill="#93C5FD" font-size="9.5" font-weight="700" text-anchor="middle">2. RETARGET</text>
-      <text x="191" y="53" fill="#E6EAF0" font-size="8.2" text-anchor="middle">Headless Blender 5.3</text>
-      <text x="191" y="66" fill="#9AA3B2" font-size="7.6" text-anchor="middle">World-Delta Math</text>
-      <text x="191" y="79" fill="#9AA3B2" font-size="7.6" text-anchor="middle">15 Bones &bull; 30 FPS</text>
-
-      <line x1="248" y1="55" x2="264" y2="55" stroke="#4B6B99" stroke-width="1.6" marker-end="url(#arr)"/>
-
-      <rect x="266" y="18" width="114" height="74" rx="5" fill="#1B1F27" stroke="#2D3442"/>
-      <text x="323" y="37" fill="#93C5FD" font-size="9.5" font-weight="700" text-anchor="middle">3. SYNTHESIZE</text>
-      <text x="323" y="53" fill="#E6EAF0" font-size="8.2" text-anchor="middle">Procedural Builders</text>
-      <text x="323" y="66" fill="#9AA3B2" font-size="7.6" text-anchor="middle">Idle1, Idle2, Jump</text>
-      <text x="323" y="79" fill="#9AA3B2" font-size="7.6" text-anchor="middle">&amp; Apex Fall Loop</text>
-
-      <line x1="380" y1="55" x2="396" y2="55" stroke="#4B6B99" stroke-width="1.6" marker-end="url(#arr)"/>
-
-      <rect x="398" y="18" width="108" height="74" rx="5" fill="#1B1F27" stroke="#2D3442"/>
-      <text x="452" y="37" fill="#FBBF24" font-size="9.5" font-weight="700" text-anchor="middle">4. VALIDATE</text>
-      <text x="452" y="53" fill="#E6EAF0" font-size="8.2" text-anchor="middle">Opt-In Read-Only</text>
-      <text x="452" y="66" fill="#9AA3B2" font-size="7.6" text-anchor="middle">Rules V02&ndash;V12</text>
-      <text x="452" y="79" fill="#9AA3B2" font-size="7.6" text-anchor="middle">30 &amp; 70 FPS FK</text>
-
-      <line x1="506" y1="55" x2="522" y2="55" stroke="#4B6B99" stroke-width="1.6" marker-end="url(#arr)"/>
-
-      <rect x="524" y="18" width="100" height="74" rx="5" fill="#1B1F27" stroke="#2D3442"/>
-      <text x="574" y="37" fill="#34D399" font-size="9.5" font-weight="700" text-anchor="middle">5. AUTO-FIX</text>
-      <text x="574" y="53" fill="#E6EAF0" font-size="8.2" text-anchor="middle">Explicit Categories</text>
-      <text x="574" y="66" fill="#9AA3B2" font-size="7.6" text-anchor="middle">Writes *_fixed/</text>
-      <text x="574" y="79" fill="#9AA3B2" font-size="7.6" text-anchor="middle">Auto Re-Validates</text>
-
-      <line x1="624" y1="55" x2="640" y2="55" stroke="#4B6B99" stroke-width="1.6" marker-end="url(#arr)"/>
-
-      <rect x="642" y="18" width="92" height="74" rx="5" fill="#1B1F27" stroke="#3B82F6"/>
-      <text x="688" y="37" fill="#93C5FD" font-size="9.5" font-weight="700" text-anchor="middle">6. STUDIO</text>
-      <text x="688" y="53" fill="#E6EAF0" font-size="8.2" text-anchor="middle">Luau Euler Fix</text>
-      <text x="688" y="66" fill="#9AA3B2" font-size="7.6" text-anchor="middle">V10 Pack Check</text>
-      <text x="688" y="79" fill="#34D399" font-size="7.6" text-anchor="middle">Publish V1 IDs</text>
-
-      <!-- Bottom isolation bar -->
-      <rect x="6" y="108" width="728" height="44" rx="5" fill="#161A22" stroke="#242A36"/>
-      <text x="20" y="126" fill="#CBD5E1" font-size="8.3" font-weight="700">ISOLATION &amp; SAFETY:</text>
-      <text x="148" y="126" fill="#9AA3B2" font-size="8.1">Private Blender env in %LOCALAPPDATA%\AnimForge &bull; Never modifies input .xfbin or original .fbx files</text>
-      <text x="20" y="142" fill="#CBD5E1" font-size="8.3" font-weight="700">PARALLELISM &amp; CACHE:</text>
-      <text x="158" y="142" fill="#9AA3B2" font-size="8.1">Up to 4 parallel headless Blender workers &bull; SHA-256 resume cache (.animforge_cache.json) skips unchanged exports</text>
-    </svg>
-  </div>
-
-  <h2>Core Design Guarantees</h2>
-  <div class="card-grid-2">
-    <div class="card">
-      <div class="card-title">100% Offline &amp; Portable</div>
-      Zero network calls, zero telemetry, zero external dependencies. Runs directly from <code>dist\AnimForge\AnimForge.exe</code> with Blender 5.3.0 bundled beside the executable and isolated from your user <code>%APPDATA%</code> Blender config.
+  <h2>What You Need First</h2>
+  <div class="two-col">
+    <div class="box">
+      <div class="box-title">Required Software</div>
+      <ul>
+        <li><strong>Windows 10 or 11 (64-bit)</strong></li>
+        <li><strong>Blender 5.3+</strong> (installed normally under <code>Program Files\Blender Foundation</code>, placed in a <code>blender\</code> folder beside <code>AnimForge.exe</code>, or set via <code>ANIMFORGE_BLENDER</code>)</li>
+        <li><strong>Blender-XFBIN-Importer</strong> addon (install in Blender's addons folder or point AnimForge to it using <code>--addon-dir</code> / <code>ANIMFORGE_ADDON_DIR</code>)</li>
+      </ul>
     </div>
-    <div class="card">
-      <div class="card-title">Universal Multi-Character ASBR Support</div>
-      Auto-detects any CC2 character code (e.g. <code>4rhn01</code>, <code>4ykk01</code>, <code>7val01</code>, <code>3jtr01</code>, <code>1dio01</code>), even inside a combined <code>spc</code> folder with 50+ characters, and learns stance naming formulas like <code>bas_r_*</code> or <code>bas_s_*</code>.
-    </div>
-    <div class="card">
-      <div class="card-title">Strict Non-Destructive Separation</div>
-      <code>Convert</code> exports clean R15 FBXs with all cleanup toggles OFF by default and never runs upload checks unless you opt in. <code>Fix</code> writes exclusively to a separate <code>*_fixed</code> folder and never overwrites original FBX files.
-    </div>
-    <div class="card">
-      <div class="card-title">Per-Clip Error Isolation</div>
-      One static/face-only clip or extreme combat snap never aborts a batch. Every skip, fix, and warning is isolated per clip, shown in the dark preview dialog, and logged to <code>convert_report.json</code> / <code>fix_log.json</code>.
+    <div class="box">
+      <div class="box-title">Game Files</div>
+      <ul>
+        <li>Extracted CC2 / JoJo ASBR character files containing a body skeleton (<code>*bod1.xfbin</code>) and motion archive (<code>*mot1.xfbin</code> or <code>*viewer1.xfbin</code>).</li>
+        <li>You can point AnimForge at either a single character folder or an entire extracted <code>spc</code> folder with dozens of characters inside.</li>
+        <li>Both uncompressed <code>NUCC</code> and compressed <code>CRILAYLA</code> files work out of the box.</li>
+      </ul>
     </div>
   </div>
 
-  <h2>Retargeting &amp; FBX Export Technical Specification</h2>
-  <table>
-    <thead>
-      <tr><th>Parameter</th><th>Verified Value</th><th>Notes</th></tr>
-    </thead>
-    <tbody>
-      <tr><td><strong>Target Rig</strong></td><td>16-bone upright R15 I-pose</td><td><code>HumanoidRootPart</code> root + 15 animated child joints; bone tail <code>+0.20m Z</code>, roll <code>0.0</code>.</td></tr>
-      <tr><td><strong>Rest-Pose Arm Offsets</strong></td><td>L: <code>(0, -90&deg;, 0)</code> / R: <code>(0, +90&deg;, 0)</code></td><td>Aligns CC2 T-pose arms into Roblox upright R15 arm orientation before world-delta retargeting.</td></tr>
-      <tr><td><strong>Pelvis Height Scaling</strong></td><td><code>0.70 / src_pelvis_rest.z</code></td><td>Automatically normalizes tall vs. short character pelvis translation into R15 scale.</td></tr>
-      <tr><td><strong>Quaternion Mapping</strong></td><td><code>q_rbx = (w, -x, +y, -z)</code></td><td>Hemisphere-continuous quaternions baked per frame at <code>30 FPS</code>; zero 360&deg; SLERP flips.</td></tr>
-      <tr><td><strong>FBX Export Flags</strong></td><td><code>scale=0.01</code>, <code>-Z</code> fwd, <code>Y</code> up</td><td><code>use_selection=True</code>, <code>ARMATURE</code> only, <code>add_leaf_bones=False</code>, <code>simplify=1.0</code>.</td></tr>
-      <tr><td><strong>Studio Curve Schema</strong></td><td><code>EulerRotationCurve (XYZ)</code></td><td>Bundled Luau post-processor converts Studio's quaternion <code>RotationCurve</code> into schema-valid XYZ Euler curves.</td></tr>
-    </tbody>
-  </table>
+  <h2>How the Whole Process Works</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-n">1</div>
+      <p><strong>Scan your character folder:</strong> Open <code>AnimForge.exe</code>, select your <code>.xfbin</code> input folder and an empty output folder, and click <strong>Scan XFBINs</strong>. Pick the character you want from the <strong>Charcode</strong> dropdown.</p>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <p><strong>Export FBX clips and build loops:</strong> Click <strong>Locomotion</strong> if you only want core movement clips (walk, dash, idle, jump, fall), then click <strong>Convert Selected</strong> and <strong>Build Selected Procedural Clips</strong>.</p>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <p><strong>Validate against Roblox upload rules:</strong> Switch to <strong>Validate / Fix</strong> and click <strong>Run verification</strong>. AnimForge checks speed limits, floor clipping, and joint angles offline before you spend time importing into Studio.</p>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <p><strong>Auto-fix problems into a new folder:</strong> Click <strong>Fix issues...</strong>, review the before/after preview list, and click <strong>Write Fixed FBX(s) &amp; Re-validate</strong>. Fixed files go into a new <code>*_fixed</code> folder and are checked again automatically.</p>
+    </div>
+    <div class="step">
+      <div class="step-n">5</div>
+      <p><strong>Convert curves in Studio and publish:</strong> Import the fixed <code>.fbx</code> clips in Roblox Studio's Animation Editor, run AnimForge's Studio script in the Command Bar so Roblox accepts the curves, publish each clip as a <strong>new asset (Version 1)</strong>, and check your 9-slot pack in <strong>Pack &amp; Studio</strong>.</p>
+    </div>
+  </div>
 
-  <div class="page-footer">
-    <span>R15 AnimForge User Guide &amp; Technical Report</span>
+  <div class="note">
+    <strong>Built-in tooltips:</strong> Any setting or checkbox in the app with a small <code class="q" style="background:none;border:none;padding:0;color:#9BA3B0;">?</code> next to it has a hover tooltip explaining what it does. Local app settings and Blender worker caches live inside <code>%LOCALAPPDATA%\AnimForge</code> so your personal Blender setup is never touched.
+  </div>
+
+  <div class="page-foot">
+    <span>R15 AnimForge v1.0.0 User Guide</span>
     <span>Page 2</span>
   </div>
 </section>
 
-<!-- ==================== PAGE 3: QUICKSTART WORKFLOW ==================== -->
+<!-- ==================== PAGE 3: CONVERT TAB ==================== -->
 <section class="page">
-  <div class="page-header">
+  <div class="page-top">
     <strong>R15 AnimForge v1.0.0</strong>
-    <span>Section 02 &bull; Step-by-Step Quickstart Workflow</span>
+    <span>Convert Tab</span>
   </div>
 
-  <h1><span class="sec-num">02</span> Quickstart: XFBIN to Roblox Marketplace</h1>
-  <p>
-    Follow these five steps to convert any JoJo ASBR / CC2 character's <code>.xfbin</code> archives into a validated Roblox R15 Animation Pack. You can hover over any tiny superscript <span class="qbadge">?</span> inside the program for an instant reminder of what an option does.
+  <h1>2. Converting Animations (<code>Convert</code> Tab)</h1>
+  <p class="lead">
+    Use the top bar and the <strong>Convert</strong> tab to scan game archives, pick a character, choose which clips to export, and convert them to R15 <code>.fbx</code> files.
   </p>
 
-  <div class="step-box">
-    <div class="step-num">1</div>
-    <div class="step-body">
-      <strong>Launch &amp; Scan Your Character Folder</strong> — Double-click <code>AnimForge.exe</code> (no console window pops up). Set <strong>Input Folder</strong> to either a single character folder or a combined ASBR <code>spc</code> dump, set <strong>Output Folder</strong> to where you want <code>.fbx</code> files saved, keep <strong>Character Profile</strong> on <code>auto</code>, and click <strong>Scan XFBINs</strong>. If multiple characters exist in the folder, pick your target code from the <strong>Charcode</strong> dropdown — it re-scans that character automatically.
-    </div>
-  </div>
-
-  <div class="step-box">
-    <div class="step-num">2</div>
-    <div class="step-body">
-      <strong>Export Locomotion / Pack Clips &amp; Procedural Loops</strong> — In the <strong>Convert</strong> tab, click <strong>Locomotion</strong> to select only core pack clips (Walk, Run/Dash, Idle, Jump, Fall), or keep <strong>All</strong> to export the character's entire moveset. Click <strong>Convert Selected</strong> to export raw R15 <code>.fbx</code> clips, and click <strong>Build Selected Procedural Clips</strong> to synthesize seamless <code>Idle Loop</code>, <code>Alt Idle Look</code>, <code>Jump</code> (starting from idle), and <code>Fall Loop</code> (matching Jump apex).
-    </div>
-  </div>
-
-  <div class="step-box">
-    <div class="step-num">3</div>
-    <div class="step-body">
-      <strong>Validate Against Roblox Upload Rules</strong> — Switch to the <strong>Validate / Fix</strong> tab (or check <em>Verify for upload</em> before converting). Point <strong>FBX File or Folder</strong> to your output folder and click <strong>Run verification</strong>. Every FBX is sampled at true <strong>30 FPS</strong> and checked against Roblox's 30 &amp; 70 FPS speed cap (<code>51 studs/s</code>), Roxie floor depth (<code>-0.10 studs</code>), non-LowerTorso translation, and joint limits.
-    </div>
-  </div>
-
-  <div class="step-box">
-    <div class="step-num">4</div>
-    <div class="step-body">
-      <strong>Auto-Fix Failing Clips &amp; Confirm Re-validation</strong> — Select specific rows in the table (or leave unselected to fix all issues), review the <strong>Explicit Auto-Fix</strong> checkboxes, and click <strong>Fix issues...</strong>. Inspect the dark <strong>Fix Preview</strong> modal, then click <strong>Write Fixed FBX(s) &amp; Re-validate</strong>. Fixed clips are written to a new <code>*_fixed</code> folder and automatically re-validated on disk so you see real <code>PASS</code> confirmation.
-    </div>
-  </div>
-
-  <div class="step-box">
-    <div class="step-num">5</div>
-    <div class="step-body">
-      <strong>Import in Roblox Studio, Run Luau Script &amp; Publish as Version 1</strong> — Import the fixed <code>.fbx</code> clips onto your R15 rig in Studio's Animation Editor. In AnimForge's <strong>Pack &amp; Studio</strong> tab, click <strong>Copy Studio Script</strong>, paste it into Studio's Command Bar and press Enter to convert quaternion curves to valid <code>EulerRotationCurve (XYZ)</code>. Load each <code>... [FIXED]</code> animation, publish each as a <strong>NEW animation (Version 1)</strong>, paste the 9 IDs into <strong>Pack &amp; Studio</strong>, and run <strong>Check Pack Manifest (V10)</strong>.
-    </div>
-  </div>
-
   <figure>
-    <img src="assets/01_convert_tab.png" alt="Convert tab overview">
-    <figcaption>
-      <strong>Figure 1 — Convert Tab Workspace:</strong> Top bar shows detected character (<code>4ykk01</code>), body archive, action count, and 52 characters available in the folder. Left pane filters and toggles individual actions (with the 1-click <strong>Locomotion</strong> preset). Right pane groups the 2-column <strong>Optional Cleanup Operators</strong>, dynamic <strong>Idle / Jump / Fall Builders</strong> with matched clip names, and <strong>Convert &amp; Optional Upload Check</strong>. The bottom bar tracks progress and logs color-coded events.
-    </figcaption>
+    <img src="assets/01_convert_tab.png" alt="Convert tab workspace" style="max-height:2.10in;">
+    <figcaption>Top bar showing detected character (<code>4ykk01</code>, Yukako Yamagishi), discovered action list on the left, and cleanup/builder panels on the right.</figcaption>
   </figure>
 
-  <div class="page-footer">
-    <span>R15 AnimForge User Guide &amp; Technical Report</span>
+  <h2 style="margin-top:10px;">Top Bar Controls</h2>
+  <table style="font-size:8.6pt;margin:6px 0 8px 0;">
+    <thead>
+      <tr><th style="width:22%;">Control</th><th style="width:13%;">Default</th><th>What it does</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:5px 8px;"><strong>Input Folder</strong></td>
+        <td style="padding:5px 8px;">Last used</td>
+        <td style="padding:5px 8px;">Folder containing your <code>.xfbin</code> files. Subfolders are scanned automatically, so pointing at a full <code>data/spc</code> dump works just as well as a single character folder.</td>
+      </tr>
+      <tr>
+        <td style="padding:5px 8px;"><strong>Output Folder</strong></td>
+        <td style="padding:5px 8px;">Last used</td>
+        <td style="padding:5px 8px;">Where converted <code>.fbx</code> files and logs (<code>convert_report.json</code>) are saved.</td>
+      </tr>
+      <tr>
+        <td style="padding:5px 8px;"><strong>Character Profile</strong><span class="q">?</span></td>
+        <td style="padding:5px 8px;"><code>auto</code></td>
+        <td style="padding:5px 8px;">Controls bone names and builder defaults. Leave on <code>auto</code> for normal use; custom profiles in <code>profiles\</code> load automatically when that character is scanned.</td>
+      </tr>
+      <tr>
+        <td style="padding:5px 8px;"><strong>Charcode</strong><span class="q">?</span></td>
+        <td style="padding:5px 8px;"><code>auto</code></td>
+        <td style="padding:5px 8px;">Lists every animatable character found by code and name (e.g. <code>4ykk01 &mdash; Yukako Yamagishi (Part 4)</code>). Costume skins without animations are hidden, and split pairs (<code>6pci02</code> + <code>6pci01bod1</code>) are matched automatically.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:10px;">Selecting &amp; Converting Actions</h2>
+  <table style="font-size:8.6pt;margin:6px 0;">
+    <thead>
+      <tr><th style="width:22%;">Control</th><th>How to use it</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:5px 8px;"><strong>Filter / All / None</strong></td>
+        <td style="padding:5px 8px;">Type in <strong>Filter</strong> (e.g. <code>walk</code> or <code>atk_</code>) to narrow the list, or click rows to toggle their checkmark. Hiding rows does not uncheck them.</td>
+      </tr>
+      <tr>
+        <td style="padding:5px 8px;"><strong>Locomotion</strong><span class="q">?</span></td>
+        <td style="padding:5px 8px;">Selects core movement/idle clips (<code>bas_nut</code>, <code>walk</code>, <code>dash</code>, <code>run</code>, <code>jump</code>, <code>fall</code>, <code>idle</code>, <code>climb</code>, <code>swim</code>) and skips combat, hit, and facial clips.</td>
+      </tr>
+      <tr>
+        <td style="padding:5px 8px;"><strong>Verify for upload</strong><span class="q">?</span></td>
+        <td style="padding:5px 8px;">Off by default. If checked, switches to <strong>Validate / Fix</strong> and runs upload checks right after conversion finishes. Check <strong>Remember choice</strong> to save it.</td>
+      </tr>
+      <tr>
+        <td style="padding:5px 8px;"><strong>Convert Selected</strong></td>
+        <td style="padding:5px 8px;">Runs up to 4 headless Blender workers at 30 FPS and caches hashes (<code>.animforge_cache.json</code>) so unchanged clips are skipped on re-runs.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-foot">
+    <span>R15 AnimForge v1.0.0 User Guide</span>
     <span>Page 3</span>
   </div>
 </section>
 
-<!-- ==================== PAGE 4: EVERY SETTING EXPLAINED ==================== -->
+<!-- ==================== PAGE 4: CLEANUP & BUILDERS ==================== -->
 <section class="page">
-  <div class="page-header">
+  <div class="page-top">
     <strong>R15 AnimForge v1.0.0</strong>
-    <span>Section 03 &bull; Complete GUI Settings Reference</span>
+    <span>Cleanup &amp; Builders</span>
   </div>
 
-  <h1><span class="sec-num">03</span> Complete Settings &amp; Controls Reference</h1>
-  <p>
-    Every non-obvious control in R15 AnimForge carries a tiny superscript <span class="qbadge">?</span> badge showing its inline hover explanation. Below is the complete reference of every setting, its default value, its internal threshold, and when to change it.
+  <h1>3. Cleanup Checkboxes &amp; Loop Builders</h1>
+  <p class="lead">
+    All six cleanup checkboxes on the right side of the <strong>Convert</strong> tab start <strong>OFF</strong> so batch exports preserve original fighting-game animations faithfully. Turn them on only when you want cleaner R15 posture on specific clips.
   </p>
 
-  <h2>Top Workbench Bar (Shared Across All Tabs)</h2>
+  <h2>Optional Cleanup Operators</h2>
   <table>
     <thead>
-      <tr><th style="width:22%;">Control</th><th style="width:14%;">Default</th><th>Behavior &amp; Guidance</th></tr>
+      <tr><th style="width:28%;">Checkbox</th><th style="width:18%;">Limit Used</th><th>When to turn it on</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>Input Folder</strong></td><td>Last used</td><td>Root folder containing <code>.xfbin</code> archives. Scanned recursively — works on single-character folders or full ASBR <code>spc</code> dumps. Never modified.</td></tr>
-      <tr><td><strong>Output Folder</strong></td><td>Last used</td><td>Destination for exported R15 <code>.fbx</code> files, <code>convert_report.json</code>, <code>bone_map_report.json</code>, and <code>.animforge_cache.json</code>.</td></tr>
-      <tr><td><strong>Character Profile</strong><span class="qbadge">?</span></td><td><code>auto</code></td><td>Selects bone-mapping aliases, rest-pose offsets, and builder recipes. Keep <code>auto</code> for universal ASBR/CC2 detection (automatically loads <code>4rhn01.json</code> if Rohan is detected).</td></tr>
-      <tr><td><strong>Charcode</strong><span class="qbadge">?</span></td><td><code>auto</code></td><td>Populated automatically with every character code discovered in Input Folder. Picking a code re-scans that character immediately in 1 click. Resets to <code>auto</code> when browsing a new Input Folder.</td></tr>
+      <tr>
+        <td><strong>RightHand wrist clamp</strong><span class="q">?</span></td>
+        <td><code>&plusmn;3&deg;</code> XZ, <code>&plusmn;10&deg;</code> Y</td>
+        <td>Keeps exaggerated wrist bends from clipping into blocky R15 forearms. Helpful for idles and walks.</td>
+      </tr>
+      <tr>
+        <td><strong>LeftHand wrist clamp</strong><span class="q">?</span></td>
+        <td><code>&plusmn;8&deg;</code> XZ, <code>&plusmn;10&deg;</code> Y</td>
+        <td>Slightly looser clamp for the left wrist.</td>
+      </tr>
+      <tr>
+        <td><strong>Elbow flexion cap (105&deg;)</strong><span class="q">?</span></td>
+        <td><code>-105&deg;..+10&deg;</code> X</td>
+        <td>Stops forearms from folding through upper-arm geometry on chunky R15 avatars.</td>
+      </tr>
+      <tr>
+        <td><strong>Feet leveled flat to floor</strong><span class="q">?</span></td>
+        <td><code>0&deg;</code> pitch/roll</td>
+        <td>Flattens both feet onto the ground while keeping facing yaw. Great for grounded idles; leave <strong>OFF</strong> for jumps, kicks, and aerial clips.</td>
+      </tr>
+      <tr>
+        <td><strong>Head forward yaw (+36&deg;)</strong><span class="q">?</span></td>
+        <td><code>+36&deg;</code> world Y</td>
+        <td>Turns angled fighting-game idle stances so the character looks forward toward the Roblox camera.</td>
+      </tr>
+      <tr>
+        <td><strong>UpperTorso flush align</strong><span class="q">?</span></td>
+        <td><code>0&deg;</code> yaw, <code>0.25&times;</code> roll</td>
+        <td>Squares the upper torso over the waist while counter-rotating the head and arms so limbs keep their pose. Also applies to the procedural builders below.</td>
+      </tr>
     </tbody>
   </table>
 
-  <h2>Discovered Actions &amp; Selection Controls (Convert Tab — Left)</h2>
+  <h2>Built-in Idle, Jump &amp; Fall Builders</h2>
+  <p>
+    Fighting games rarely include ready-made Roblox breathing idles or linked jump/fall loops. Clicking <strong>Build Selected Procedural Clips</strong> generates up to four pack-ready <code>.fbx</code> clips from the scanned character:
+  </p>
   <table>
     <thead>
-      <tr><th style="width:22%;">Control</th><th style="width:14%;">Default</th><th>Behavior &amp; Guidance</th></tr>
+      <tr><th style="width:20%;">Builder</th><th style="width:17%;">Length / Loop</th><th style="width:25%;">Source clips used</th><th>What it creates</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>Filter</strong></td><td>Empty</td><td>Live substring filter over discovered action names (e.g. type <code>walk</code>, <code>jump</code>, or <code>bas_</code>). Does not uncheck hidden actions.</td></tr>
-      <tr><td><strong>All / None</strong></td><td>All checked</td><td>Checks or unchecks every discovered action in the character's motion archives. Clicking any row toggles its <code>&check;</code> mark.</td></tr>
-      <tr><td><strong>Locomotion</strong><span class="qbadge">?</span></td><td>Button</td><td>One-click preset selecting core movement/idle clips (<code>bas_nut</code>, <code>walk</code>, <code>dash</code>, <code>run</code>, <code>jump</code>, <code>fall</code>, <code>idle</code>, <code>climb</code>, <code>swim</code>) while excluding combat/hit/facial clips (<code>atk</code>, <code>dmg</code>, <code>hha</code>, <code>gha</code>, <code>spa</code>, <code>fce</code>).</td></tr>
+      <tr>
+        <td><strong>Idle Loop</strong><span class="q">?</span></td>
+        <td>91 frames (3.0s)<br><span class="ok">Loop</span></td>
+        <td><code>bas_nut_st</code> + <code>bas_nut</code></td>
+        <td>Takes frame 0 as a clean standing pose (clamped wrists, leveled feet, forward head) and adds subtle symmetric breathing with an exact loop seam.</td>
+      </tr>
+      <tr>
+        <td><strong>Alt Idle Look</strong><span class="q">?</span></td>
+        <td>121 frames (4.0s)<br><span class="ok">Loop</span></td>
+        <td><code>bas_nut_st</code> + <code>bas_nut</code></td>
+        <td>Secondary idle for Roblox <code>Animation1</code> (Weight=1). Adds smooth left/right head turns and slight weight shift while keeping feet planted.</td>
+      </tr>
+      <tr>
+        <td><strong>Jump</strong><span class="q">?</span></td>
+        <td>36 frames (1.17s)<br><span class="info">No-loop</span></td>
+        <td><code>bas_nut_jump</code> + <code>bas_jump</code> + <code>bas_jump_lp</code></td>
+        <td>Blends smoothly from idle into takeoff crouch, launches upward (kept under 51 studs/s), and ends right on the opening pose of Fall Loop.</td>
+      </tr>
+      <tr>
+        <td><strong>Fall Loop</strong><span class="q">?</span></td>
+        <td>36 frames (1.17s)<br><span class="ok">Loop</span></td>
+        <td><code>bas_jump_lp</code></td>
+        <td>Airborne hang loop anchored to the final frame of Jump so Roblox transitions from Jump to Fall without snapping.</td>
+      </tr>
     </tbody>
   </table>
 
-  <h2>Optional Cleanup Operators (Convert Tab — Top Right)</h2>
-  <p style="font-size:8.6pt;color:var(--fg-muted);">All six operators are <strong>OFF by default</strong> so batch conversions faithfully preserve original motion unless you explicitly opt in.</p>
-  <table>
-    <thead>
-      <tr><th style="width:26%;">Operator</th><th style="width:18%;">Exact Threshold</th><th>Effect &amp; Recommended Usage</th></tr>
-    </thead>
-    <tbody>
-      <tr><td><strong>RightHand wrist clamp</strong><span class="qbadge">?</span></td><td><code>&plusmn;3&deg;</code> XZ, <code>&plusmn;10&deg;</code> Y</td><td>Prevents expressive fighting-game wrist hyper-extension from clipping into blocky R15 forearms. Good for idles/walks.</td></tr>
-      <tr><td><strong>LeftHand wrist clamp</strong><span class="qbadge">?</span></td><td><code>&plusmn;8&deg;</code> XZ, <code>&plusmn;10&deg;</code> Y</td><td>Slightly looser clamp for the off-hand while eliminating extreme cuff twists.</td></tr>
-      <tr><td><strong>Elbow flexion cap (105&deg;)</strong><span class="qbadge">?</span></td><td><code>-105&deg;..+10&deg;</code> X, <code>&plusmn;5&deg;</code> YZ</td><td>Stops <code>LeftLowerArm</code> / <code>RightLowerArm</code> from folding into the bicep mesh on blocky avatars.</td></tr>
-      <tr><td><strong>Feet leveled flat to floor</strong><span class="qbadge">?</span></td><td><code>0&deg;</code> world pitch/roll</td><td>Levels both feet flat to ground aligned with shin yaw. Great for grounded idles; keep <strong>OFF</strong> for kicks, jumps, and aerials.</td></tr>
-      <tr><td><strong>Head forward yaw (+36&deg;)</strong><span class="qbadge">?</span></td><td><code>+36&deg;</code> world Y yaw</td><td>Counter-rotates sideways fighting-game idle stances so the character's face points toward the Roblox camera.</td></tr>
-      <tr><td><strong>UpperTorso flush align</strong><span class="qbadge">?</span></td><td><code>0&deg;</code> yaw, <code>0.25&times;</code> roll</td><td>Aligns <code>UpperTorso</code> with <code>LowerTorso</code> while inversely compensating <code>Head</code> and <code>UpperArms</code> so limbs stay in place. Default <strong>OFF</strong>.</td></tr>
-    </tbody>
-  </table>
-
-  <h2>Convert &amp; Optional Upload Check (Convert Tab — Bottom Right)</h2>
-  <table>
-    <thead>
-      <tr><th style="width:26%;">Setting</th><th style="width:14%;">Default</th><th>Behavior &amp; Guidance</th></tr>
-    </thead>
-    <tbody>
-      <tr><td><strong>Verify for upload (optional)</strong><span class="qbadge">?</span></td><td>OFF</td><td>When checked, automatically switches to <strong>Validate / Fix</strong> and runs read-only verification right after conversion completes.</td></tr>
-      <tr><td><strong>Remember choice</strong><span class="qbadge">?</span></td><td>OFF</td><td>Persists your <em>Verify for upload</em> preference in <code>%LOCALAPPDATA%\AnimForge\settings.json</code> across restarts.</td></tr>
-      <tr><td><strong>Convert Selected / Cancel</strong></td><td>Parallel (1&ndash;4)</td><td>Runs headless Blender workers with SHA-256 resume caching. Clicking <strong>Cancel</strong> terminates active Blender workers cleanly.</td></tr>
-    </tbody>
-  </table>
-
-  <div class="page-footer">
-    <span>R15 AnimForge User Guide &amp; Technical Report</span>
+  <div class="page-foot">
+    <span>R15 AnimForge v1.0.0 User Guide</span>
     <span>Page 4</span>
   </div>
 </section>
 
-<!-- ==================== PAGE 5: PROCEDURAL BUILDERS & FORMULA MATCHER ==================== -->
+<!-- ==================== PAGE 5: CHARACTER MATCHER ==================== -->
 <section class="page">
-  <div class="page-header">
+  <div class="page-top">
     <strong>R15 AnimForge v1.0.0</strong>
-    <span>Section 04 &bull; Procedural Builders &amp; Formula Matcher</span>
+    <span>Character Matching</span>
   </div>
 
-  <h1><span class="sec-num">04</span> Procedural Builders &amp; Smart Formula Matcher</h1>
-  <p>
-    Fighting games rarely ship ready-made Roblox-style cyclic breathing idles or seamlessly linked Jump &rarr; Fall animations. AnimForge's <strong>Idle / Jump / Fall Builders</strong> synthesize four pack-ready animations directly from any character's base clips.
+  <h1>4. How the Character &amp; Clip Matcher Works</h1>
+  <p class="lead">
+    Different JoJo ASBR characters name their internal animations slightly differently. AnimForge scans each character's actual action list instead of failing whenever a clip name doesn't match Rohan's layout.
   </p>
 
-  <h2>The Four Built-In Procedural Recipes</h2>
-  <table>
-    <thead>
-      <tr><th style="width:18%;">Builder</th><th style="width:14%;">Length / Loop</th><th style="width:26%;">Default Source Roles</th><th>Synthesis Algorithm</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Idle Loop</strong><span class="qbadge">?</span><br><code>*_idle_loop.fbx</code></td>
-        <td><strong>91 frames</strong><br><code>3.00s</code><br><span class="tag tag-ok">LOOP</span></td>
-        <td><code>base_action</code> (<code>bas_nut_st</code>)<br><code>breathing_action</code> (<code>bas_nut</code>)</td>
-        <td>Builds a cleaned standing pose from frame 0 (wrist clamps, +36&deg; head yaw, flat feet) and overlays symmetric cyclic breathing deltas (<code>0.55&times;</code> pelvis bob + per-joint weights) with exact frame 0 == frame 90 continuity.</td>
-      </tr>
-      <tr>
-        <td><strong>Alt Idle Look</strong><span class="qbadge">?</span><br><code>*_alt_idle_look.fbx</code></td>
-        <td><strong>121 frames</strong><br><code>4.00s</code><br><span class="tag tag-ok">LOOP</span></td>
-        <td><code>base_action</code> (<code>bas_nut_st</code>)<br><code>breathing_action</code> (<code>bas_nut</code>)</td>
-        <td>Secondary idle for Roblox <code>Animation1 (Weight=1)</code>. Adds smooth Hermite-eased head look-left / look-right turns, subtle torso weight shift, and breathing while holding both feet planted on the ground.</td>
-      </tr>
-      <tr>
-        <td><strong>Jump</strong><span class="qbadge">?</span><br><code>*_R15_Jump.fbx</code></td>
-        <td><strong>36 frames</strong><br><code>1.17s</code><br><span class="tag tag-info">NO-LOOP</span></td>
-        <td><code>crouch_action</code> (<code>bas_nut_jump</code>)<br><code>launch_action</code> (<code>bas_jump</code>)<br><code>hang_action</code> (<code>bas_jump_lp</code>)</td>
-        <td>Starts at the character's idle pose (frame 0), dips into crouch takeoff (frame 2 of <code>nut_jump</code>), drives upward through polished launch frames (smoothed to stay under 51 studs/s), and settles cleanly into the apex pose of <strong>Fall Loop</strong>.</td>
-      </tr>
-      <tr>
-        <td><strong>Fall Loop</strong><span class="qbadge">?</span><br><code>*_R15_Fall.fbx</code></td>
-        <td><strong>36 frames</strong><br><code>1.17s</code><br><span class="tag tag-ok">LOOP</span></td>
-        <td><code>hang_action</code> (<code>bas_jump_lp</code>)</td>
-        <td>Polishes the airborne hang loop with upright torso yaw alignment, elbow/wrist/foot clamps, and exact cyclic wrapping anchored to the final frame of <strong>Jump</strong> for zero snap when transitioning from Jump to Fall in-game.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h2>How the Formula Learner Works Across Every ASBR Character</h2>
-  <p>
-    Different JoJo ASBR characters use different internal naming conventions (for example, Rohan uses <code>4rhn01_bas_jump_lp</code>, Yukako omits <code>bas_nut_st</code>, Part 7 mounted/stance characters use <code>7val01_bas_r_jump_lp</code>, and Stand variants use <code>3jtr10_bas_s_jump_lp</code>). Instead of requiring exact names, <code>action_matcher.py</code> runs a 3-tier universal resolver shared by both the GUI and Blender worker:
-  </p>
-
-  <div class="card-grid-2">
-    <div class="card">
-      <div class="card-title">Tier 1 &amp; 2 — Prefix Stripping &amp; Stance Learning</div>
+  <h2>Automatic Name Matching Across Any ASBR Character</h2>
+  <div class="two-col">
+    <div class="box">
+      <div class="box-title">Stance &amp; Prefix Learning</div>
       <ul>
-        <li>Strips charcode prefixes case-insensitively — including cross-variant prefixes (e.g. <code>3jtr10_*</code> inside a <code>3jtr01</code> dump) and archive suffixes (<code>_001</code>).</li>
-        <li>Inspects all scanned locomotion clips to learn any inserted 1&ndash;3 char stance tag (e.g. <code>bas_r_*</code>, <code>bas_s_*</code>).</li>
-        <li>Penalizes directional variants (<code>front</code>, <code>back</code>, <code>left</code>, <code>right</code>) and rejects combat/damage clips (<code>atk</code>, <code>dmg</code>, <code>hit</code>, <code>end</code>) so <code>7val01_bas_r_jump_lp</code> always beats <code>7val01_bas_r_jump_front_lp</code>.</li>
+        <li><strong>Case-insensitive &amp; cross-variant prefixes:</strong> Uppercase names or cross-variant prefixes inside an archive (like <code>3jtr10_*</code> inside <code>3jtr01</code>) are normalized automatically.</li>
+        <li><strong>Inserted stance tags:</strong> Mounted, Stand, and style characters insert tags like <code>bas_r_*</code> (horseback) or <code>bas_s_*</code> (Stand mode). AnimForge detects that pattern across the scanned archive and applies it to all four builders.</li>
+        <li><strong>Smart filtering:</strong> Directional versions (<code>front</code>, <code>back</code>, <code>left</code>, <code>right</code>) and attack/hit clips (<code>atk</code>, <code>dmg</code>, <code>hit</code>) are penalized so neutral clips like <code>7val01_bas_r_jump_lp</code> win cleanly.</li>
       </ul>
     </div>
-    <div class="card">
-      <div class="card-title">Tier 3 — Graceful Role Fallback Ladder</div>
+    <div class="box">
+      <div class="box-title">Fallback Rules When Clips Are Missing</div>
       <ul>
-        <li>If <code>bas_nut_st</code> is absent (e.g. <code>4ykk01</code>), <strong>Idle Loop</strong> and <strong>Alt Idle Look</strong> fall back to <code>bas_nut</code> (or <code>idle</code> / <code>wait</code> / <code>stand</code>) automatically.</li>
-        <li>If <code>bas_nut_jump</code> is absent, <strong>Jump</strong> uses frame 0 of the matched <code>launch_action</code> (<code>bas_*_jump</code>) as the crouch pose.</li>
-        <li>If only a <strong>Fall</strong> clip exists without idle/launch clips, <strong>Fall Loop</strong> still builds cleanly standalone.</li>
+        <li><strong>Missing <code>bas_nut_st</code>:</strong> Some characters (such as <code>4ykk01</code> Yukako) have <code>bas_nut</code> without a separate <code>_st</code> pose. Idle Loop and Alt Idle Look automatically fall back to <code>bas_nut</code> (or <code>idle</code> / <code>wait</code> / <code>stand</code>).</li>
+        <li><strong>Missing <code>bas_nut_jump</code>:</strong> Jump automatically uses frame 0 of the matched launch clip (<code>bas_*_jump</code>) as the crouch takeoff pose.</li>
+        <li><strong>Fall-only archives:</strong> If a character only has a hang/fall clip and no idle or jump launch clips, Fall Loop still enables and builds on its own.</li>
       </ul>
     </div>
   </div>
 
-  <h2>Reading Builder Status Badges in the UI</h2>
+  <h2>What the Status Text Under Each Builder Means</h2>
   <table>
     <thead>
-      <tr><th style="width:24%;">Status Line Color &amp; Text</th><th>Meaning</th></tr>
+      <tr><th style="width:28%;">Status Color &amp; Prefix</th><th>Meaning</th></tr>
     </thead>
     <tbody>
-      <tr><td><span class="tag tag-ok">GREEN</span> <code>Ready (k/k exact): ...</code></td><td>Every required source clip matched the character's exact canonical name.</td></tr>
-      <tr><td><span class="tag tag-ok">GREEN</span> <code>Matched (formula bas_r_*): ...</code></td><td>Matched via the character's learned stance formula (e.g. <code>7val01_bas_r_jump_lp</code>).</td></tr>
-      <tr><td><span class="tag tag-warn">AMBER</span> <code>Matched (best match): ...</code></td><td>One or more missing roles fell back cleanly to a compatible alias (e.g. <code>4ykk01_bas_nut</code> for standing pose). Fully ready to build.</td></tr>
-      <tr><td><span class="tag tag-fail">RED</span> <code>No match found for: ...</code></td><td>No suitable animation exists in the scanned archive for that role; checkbox is automatically disabled to prevent failed builds.</td></tr>
+      <tr>
+        <td><span class="ok">Ready (k/k exact): ...</span></td>
+        <td>All source clips matched the standard naming convention directly.</td>
+      </tr>
+      <tr>
+        <td><span class="ok">Matched (formula bas_r_*): ...</span></td>
+        <td>AnimForge learned the character's stance naming tag (e.g. <code>bas_r_</code> or <code>bas_s_</code>) and matched the right clips automatically.</td>
+      </tr>
+      <tr>
+        <td><span class="warn-txt">Matched (best match): ...</span></td>
+        <td>One expected filename didn't exist, so a compatible fallback clip was chosen (for example using <code>4ykk01_bas_nut</code> for standing pose). Ready to build.</td>
+      </tr>
+      <tr>
+        <td><span class="fail">No match found for: ...</span></td>
+        <td>No usable clip for that role exists in the scanned archive. That builder's checkbox is disabled so clicking Build won't fail mid-run.</td>
+      </tr>
     </tbody>
   </table>
 
-  <div class="callout">
-    <strong>Tip — UpperTorso Toggle Applies to Builders Too:</strong> The <em>UpperTorso flush align</em> checkbox under Optional Cleanup Operators is also respected when clicking <strong>Build Selected Procedural Clips</strong>, keeping your procedural Idle/Jump poses consistent with your converted batch.
-  </div>
+  <h2>Full Character Names &amp; Costume Filtering</h2>
+  <p>
+    CyberConnect2 <code>.xfbin</code> files only store short 6-character codes like <code>4ykk01</code> or <code>6pci02</code>. AnimForge includes a built-in lookup catalog of all ASBR fighters, Stands, DLC characters, and mounts (and also checks <code>messageInfo.bin.xfbin</code> if present in your game dump) to display full character names in the dropdown. Alternate costume skins that only contain models without animations are hidden automatically, while characters whose body and animation live under different variant numbers (such as Pucci <code>6pci02</code> + <code>6pci01bod1</code>) are paired for you.
+  </p>
 
-  <div class="page-footer">
-    <span>R15 AnimForge User Guide &amp; Technical Report</span>
+  <div class="page-foot">
+    <span>R15 AnimForge v1.0.0 User Guide</span>
     <span>Page 5</span>
   </div>
 </section>
 
-<!-- ==================== PAGE 6: VALIDATE, AUTO-FIX & RE-VALIDATION ==================== -->
+<!-- ==================== PAGE 6: VALIDATE & FIX ==================== -->
 <section class="page">
-  <div class="page-header">
+  <div class="page-top">
     <strong>R15 AnimForge v1.0.0</strong>
-    <span>Section 05 &bull; Validation, Auto-Fix &amp; Re-Validation</span>
+    <span>Validate &amp; Auto-Fix</span>
   </div>
 
-  <h1><span class="sec-num">05</span> Validate, Auto-Fix &amp; Re-Validation Guide</h1>
-  <p>
-    The <strong>Validate / Fix</strong> tab checks exported <code>.fbx</code> files offline against Roblox's Avatar Item Category rules (simulated on R15 / Roxie forward kinematics at both <strong>30 FPS</strong> and <strong>70 FPS</strong>) and repairs fixable clips into an isolated <code>*_fixed</code> folder with automatic post-export re-validation.
+  <h1>5. Checking &amp; Fixing Upload Errors (<code>Validate / Fix</code>)</h1>
+  <p class="lead">
+    Roblox rejects Avatar animations that move faster than <code>51 studs/s</code>, dip feet more than <code>0.10 studs</code> below the floor, translate bones other than <code>LowerTorso</code>, or lack joint motion. Check and fix your <code>.fbx</code> clips here before opening Studio.
   </p>
 
   <figure>
-    <img src="assets/02_validate_before.png" alt="Validate tab before fixing" style="max-height:2.75in;">
-    <figcaption>
-      <strong>Figure 2 — Validate / Fix Tab (Before Fixing):</strong> Live summary pills (<code>Total: 179 | PASS: 24 | WARN: 4 | FAIL: 151</code>), status filter radio buttons (<code>All / Issues Only / FAIL Only</code>), search box, clickable sortable columns (sorted descending by <em>Peak Speed</em>), and the untruncated <strong>Selected Clip Detail</strong> strip below the table.
-    </figcaption>
+    <img src="assets/02_validate_before.png" alt="Validate tab before fixing" style="max-height:2.05in;">
+    <figcaption>Validation results sorted by speed. Filter with <code>All</code> / <code>Issues Only</code> / <code>FAIL Only</code> or search, and click any row to view full findings below the table.</figcaption>
   </figure>
 
-  <h2>Explicit Auto-Fix Categories</h2>
-  <table>
+  <h2 style="margin-top:10px;">What Each Auto-Fix Option Changes</h2>
+  <table style="font-size:8.6pt;margin:6px 0 8px 0;">
     <thead>
-      <tr><th style="width:24%;">Checkbox</th><th style="width:12%;">Default</th><th>What It Changes</th></tr>
+      <tr><th style="width:24%;">Checkbox</th><th style="width:10%;">Default</th><th>What it fixes</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>Strip non-LT translation</strong><span class="qbadge">?</span></td><td><span class="tag tag-ok">ON</span></td><td>Zeros translation on all 14 bones other than <code>LowerTorso</code> (fixes <code>V06</code>).</td></tr>
-      <tr><td><strong>Floor lift</strong><span class="qbadge">?</span></td><td><span class="tag tag-ok">ON</span></td><td>Shifts <code>LowerTorso.Y</code> upward so feet stay at <code>&le; 0.07 studs</code> depth (fixes <code>V05</code>) AND all body/hand tips stay above <code>-3.02 studs</code> (fixes <code>V09</code>).</td></tr>
-      <tr><td><strong>Clamps</strong><span class="qbadge">?</span></td><td><span class="tag tag-ok">ON</span></td><td>Applies wrist/elbow clamps plus a <code>178&deg;</code> <code>V08</code> rest-angle ceiling so joints stay within safe bounds.</td></tr>
-      <tr><td><strong>Peak smoothing</strong><span class="qbadge">?</span></td><td><span class="tag tag-ok">ON</span></td><td>Targeted kinematic-chain SLERP smoothing + spike damping targeting <code>&le; 42.5 studs/s</code> (<code>V03</code>) and <code>&le; 1600 deg/s</code> (<code>V04</code>), plus smooth loop-seam closing (<code>V11</code>) on looping clips.</td></tr>
-      <tr><td><strong>Time-stretch</strong><span class="qbadge">?</span></td><td><span class="tag tag-warn">OFF</span></td><td>Uniformly slows extreme clips (up to <code>4.0&times;</code>, capped at <code>&le; 9.8s</code>) with exact endpoint mapping to preserve loop seams. OFF by default because it changes clip duration.</td></tr>
+      <tr><td style="padding:5px 8px;"><strong>Strip non-LT translation</strong><span class="q">?</span></td><td style="padding:5px 8px;"><span class="ok">ON</span></td><td style="padding:5px 8px;">Zeros translation curves on every bone except <code>LowerTorso</code> (fixes <code>V06</code>).</td></tr>
+      <tr><td style="padding:5px 8px;"><strong>Floor lift</strong><span class="q">?</span></td><td style="padding:5px 8px;"><span class="ok">ON</span></td><td style="padding:5px 8px;">Raises <code>LowerTorso.Y</code> so feet stay within <code>0.07 studs</code> of the floor (<code>V05</code>) and low limbs stay above <code>-3.02 studs</code> (<code>V09</code>).</td></tr>
+      <tr><td style="padding:5px 8px;"><strong>Clamps</strong><span class="q">?</span></td><td style="padding:5px 8px;"><span class="ok">ON</span></td><td style="padding:5px 8px;">Applies wrist/elbow clamps and caps joint angles from rest at <code>178&deg;</code> (<code>V08</code>).</td></tr>
+      <tr><td style="padding:5px 8px;"><strong>Peak smoothing</strong><span class="q">?</span></td><td style="padding:5px 8px;"><span class="ok">ON</span></td><td style="padding:5px 8px;">Smooths sharp spikes along fast limbs until speed is <code>&le; 42.5 studs/s</code> (<code>V03</code>) and spin is <code>&le; 1600 deg/s</code> (<code>V04</code>), and closes loop seams (<code>V11</code>).</td></tr>
+      <tr><td style="padding:5px 8px;"><strong>Time-stretch</strong><span class="q">?</span></td><td style="padding:5px 8px;"><span class="warn-txt">OFF</span></td><td style="padding:5px 8px;">Slows down very fast clips (up to <code>4&times;</code>, max <code>9.8s</code>) when smoothing alone isn't enough. Off by default because it changes clip duration.</td></tr>
     </tbody>
   </table>
 
-  <div class="card-grid-2" style="margin-top:4px;">
-    <figure style="margin:0;">
-      <img src="assets/05_fix_preview_modal.png" alt="Dark Fix Preview Modal" style="max-height:2.05in;">
-      <figcaption><strong>Figure 3 — Dark Fix Preview Modal:</strong> Shows every before&rarr;after speed, depth, and duration diff plus exact skip reasons before writing a single file.</figcaption>
+  <div class="two-col" style="margin-top:6px;">
+    <figure style="margin:0;padding:6px;">
+      <img src="assets/05_fix_preview_modal.png" alt="Fix Preview Modal" style="max-height:1.58in;">
+      <figcaption><strong>Fix Preview:</strong> Shows exact before/after metrics and skipped unfixable clips before writing any file.</figcaption>
     </figure>
-    <figure style="margin:0;">
-      <img src="assets/03_validate_after.png" alt="Validate tab after automatic revalidation" style="max-height:2.05in;">
-      <figcaption><strong>Figure 4 — Automatic Post-Fix Re-validation:</strong> Immediately switches to <code>D:\Out_4ykk01_fixed</code> and re-verifies exported FBXs on disk (<code>145 total, 0 FAIL</code>).</figcaption>
+    <figure style="margin:0;padding:6px;">
+      <img src="assets/03_validate_after.png" alt="Automatic re-validation after fixing" style="max-height:1.58in;">
+      <figcaption><strong>Auto Re-validation:</strong> Writes into a separate <code>*_fixed</code> folder and re-checks the exported files automatically.</figcaption>
     </figure>
   </div>
 
-  <div class="page-footer">
-    <span>R15 AnimForge User Guide &amp; Technical Report</span>
+  <div class="page-foot">
+    <span>R15 AnimForge v1.0.0 User Guide</span>
     <span>Page 6</span>
   </div>
 </section>
 
-<!-- ==================== PAGE 7: PACK & STUDIO PUBLISHING ==================== -->
+<!-- ==================== PAGE 7: PACK & STUDIO ==================== -->
 <section class="page">
-  <div class="page-header">
+  <div class="page-top">
     <strong>R15 AnimForge v1.0.0</strong>
-    <span>Section 06 &bull; Roblox Studio &amp; Pack Publishing</span>
+    <span>Pack &amp; Studio</span>
   </div>
 
-  <h1><span class="sec-num">06</span> Roblox Studio Post-Processing &amp; Pack Publishing</h1>
-  <p>
-    Importing a clean R15 <code>.fbx</code> into Roblox Studio's Animation Editor creates a <code>CurveAnimation</code> with <strong>Quaternion <code>RotationCurve</code></strong> instances by default. Roblox's Marketplace Avatar Item Category validator rejects <code>RotationCurve</code> as an unauthorized instance type — so every clip must be converted to <code>EulerRotationCurve (XYZ)</code> in Studio before publishing.
+  <h1>6. Getting Clips into Roblox Studio (<code>Pack &amp; Studio</code>)</h1>
+  <p style="margin-bottom:6px;">
+    When you import an <code>.fbx</code> in Roblox Studio's Animation Editor, Studio saves quaternion <code>RotationCurve</code> objects by default. Roblox's Marketplace validator rejects <code>RotationCurve</code> and requires <code>EulerRotationCurve (XYZ)</code> instead.
   </p>
 
-  <figure style="margin:6px 0 8px;">
-    <img src="assets/04_pack_studio_tab.png" alt="Pack and Studio tab" style="max-height:2.20in;">
-    <figcaption>
-      <strong>Figure 5 — Pack &amp; Studio Tab:</strong> Displays 1-click <strong>Copy Studio Script</strong>, <strong>Check Pack Manifest (V10)</strong>, the Roblox Version-1 publishing reminder banner, and all 9 required Roblox pack slots with automatic <code>&bull; Fixed FBX ready</code> / <code>&bull; FBX on disk</code> status indicators.
-    </figcaption>
+  <figure style="margin:6px 0 8px 0;padding:6px;">
+    <img src="assets/04_pack_studio_tab.png" alt="Pack and Studio tab" style="max-height:1.95in;">
+    <figcaption>Pack &amp; Studio tab: copy the Studio conversion script, check which fixed FBXs exist on disk, paste your 9 published asset IDs, and validate the pack manifest (<code>V10</code>).</figcaption>
   </figure>
 
-  <h2 style="margin-top:8px;">Studio Post-Processing &amp; Publishing Checklist</h2>
-  <div class="step-box" style="margin-bottom:4px;padding:6px 9px;">
-    <div class="step-num">1</div>
-    <div class="step-body">
-      <strong>Import FBXs into Studio</strong> — Open Roblox Studio's Animation Editor on your R15 rig (e.g. <code>Workspace.AnimRig</code>), click <code>... &rarr; Import &rarr; From FBX Animation</code> for each clip from your <code>*_fixed</code> folder, and save each clip under the rig's <code>AnimSaves</code>.
+  <div class="steps" style="gap:5px;margin:6px 0;">
+    <div class="step" style="padding:7px 10px;">
+      <div class="step-n">1</div>
+      <p><strong>Import FBXs into Studio:</strong> In Studio's Animation Editor on your R15 rig, click <code>... &rarr; Import &rarr; From FBX Animation</code> for each clip from <code>*_fixed</code> and save them inside <code>AnimSaves</code>.</p>
     </div>
-  </div>
-  <div class="step-box" style="margin-bottom:4px;padding:6px 9px;">
-    <div class="step-num">2</div>
-    <div class="step-body">
-      <strong>Run the Studio Luau Post-Processor</strong> — In AnimForge's <strong>Pack &amp; Studio</strong> tab, click <strong>Copy Studio Script</strong> (or <em>Export Studio Luau Script...</em>). In Roblox Studio, open <strong>View &rarr; Command Bar</strong>, paste the script, and press <strong>Enter</strong>. It creates a schema-valid <code>... [FIXED]</code> copy of every <code>CurveAnimation</code> (60 FPS unwrapped <code>EulerRotationCurve</code> order <code>XYZ</code>, zeroed non-<code>LowerTorso</code> positions, empty <code>MarkerCurve</code>, <code>Loop=false</code> on Jump, <code>Loop=true</code> on locomotion/idle, zero banned classes).
+    <div class="step" style="padding:7px 10px;">
+      <div class="step-n">2</div>
+      <p><strong>Run the Studio script:</strong> Click <strong>Copy Studio Script</strong> in AnimForge, open <strong>View &rarr; Command Bar</strong> in Studio, paste it, and press <strong>Enter</strong>. It creates clean <code>... [FIXED]</code> copies using 60 FPS unwrapped <code>EulerRotationCurve (XYZ)</code> and the right <code>Loop</code> flags (<code>Loop=false</code> for Jump).</p>
     </div>
-  </div>
-  <div class="step-box" style="margin-bottom:4px;padding:6px 9px;">
-    <div class="step-num">3</div>
-    <div class="step-body">
-      <strong>Publish Every Clip as a NEW Asset (Version 1)</strong> — In the Animation Editor, load each <code>... [FIXED]</code> animation (do <em>not</em> switch curve mode back to Quaternion) and click <code>... &rarr; Publish to Roblox</code> as a <strong>brand-new Animation asset</strong>. Paste each returned <code>rbxassetid://...</code> into the matching slot in AnimForge's <strong>Pack &amp; Studio</strong> tab and click <strong>Check Pack Manifest (V10)</strong>.
+    <div class="step" style="padding:7px 10px;">
+      <div class="step-n">3</div>
+      <p><strong>Publish each clip as Version 1:</strong> Load each <code>... [FIXED]</code> animation and publish it to Roblox as a <strong>brand-new animation asset</strong>. Paste the 9 asset IDs into <strong>Pack &amp; Studio</strong> and click <strong>Check Pack Manifest (V10)</strong>.</p>
     </div>
   </div>
 
-  <div class="callout fail" style="margin:6px 0;padding:6px 10px;">
-    <strong>Critical Roblox Marketplace Rule — Version 1 Only:</strong> Never overwrite an existing Roblox animation ID for an Avatar Animation Pack. Overwriting bumps the asset to <code>version: 2</code>, causing Marketplace submission to fail with <code>Unexpected version number for dependency asset id ... version: 2. Expected version: 1.</code> Always submit as a <strong>new</strong> asset so it remains version 1.
+  <div class="note danger" style="margin:7px 0;padding:7px 11px;">
+    <strong>Important Roblox rule &mdash; publish as a NEW asset (Version 1):</strong> Never overwrite an existing Roblox animation ID for an Avatar pack. Updating an existing asset bumps it to <code>version: 2</code> and causes Marketplace submission to fail with <code>Expected version: 1</code>.
   </div>
 
-  <h2 style="margin-top:8px;">Required 9-Slot Roblox Animation Pack Schema (Rule V10)</h2>
-  <table>
+  <h2 style="margin:10px 0 6px 0;">The 9 Required Pack Slots (Rule V10)</h2>
+  <table style="font-size:8.4pt;margin:4px 0;">
     <thead>
-      <tr><th style="width:18%;">Slot</th><th style="width:26%;">Studio Hierarchy</th><th style="width:14%;">Settings</th><th>Expected Source</th></tr>
+      <tr><th style="width:20%;">Slot</th><th style="width:23%;">Studio Setting</th><th>Recommended Clip Source</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>Idle1</strong></td><td><code>IdleAnimation.R15Anim.idle.Animation1</code></td><td><code>Weight=1</code>, Loop</td><td>Alt idle (e.g. <code>*_alt_idle_look</code>, plays 10%).</td></tr>
-      <tr><td><strong>Idle2</strong></td><td><code>IdleAnimation.R15Anim.idle.Animation2</code></td><td><code>Weight=9</code>, Loop</td><td>Primary breathing idle (<code>*_idle_loop</code>, plays 90%).</td></tr>
-      <tr><td><strong>Walk</strong></td><td><code>WalkAnimation.R15Anim.walk.WalkAnim</code></td><td>Loop</td><td><code>*_bas_walk_front</code> (fixed).</td></tr>
-      <tr><td><strong>Run</strong></td><td><code>RunAnimation.R15Anim.run.RunAnim</code></td><td>Loop</td><td><code>*_bas_dash_front</code> (fixed &le; 45 studs/s).</td></tr>
-      <tr><td><strong>Jump</strong></td><td><code>JumpAnimation.R15Anim.jump.JumpAnim</code></td><td><code>Loop=false</code></td><td>Procedural <code>*_R15_Jump</code> (starts from idle, ends at Fall apex).</td></tr>
-      <tr><td><strong>Fall</strong></td><td><code>FallAnimation.R15Anim.fall.FallAnim</code></td><td>Loop</td><td>Procedural <code>*_R15_Fall</code> (starts at Jump apex).</td></tr>
-      <tr><td><strong>Climb / Swim / SwimIdle</strong></td><td><code>ClimbAnim</code>, <code>SwimAnim</code>, <code>SwimIdleAnim</code></td><td>Loop</td><td>Flagged <code>[UNCONFIRMED SOURCE]</code> by default; supply custom FBX or separate V1 Roblox assets (never duplicate IDs).</td></tr>
+      <tr><td style="padding:4.5px 8px;"><strong>Idle1 &amp; Idle2</strong></td><td style="padding:4.5px 8px;"><code>Weight=1</code>, <code>Weight=9</code>, Loop</td><td style="padding:4.5px 8px;"><code>*_alt_idle_look</code> (10%) and <code>*_idle_loop</code> (90%) from the procedural builders.</td></tr>
+      <tr><td style="padding:4.5px 8px;"><strong>Walk &amp; Run</strong></td><td style="padding:4.5px 8px;">Loop</td><td style="padding:4.5px 8px;"><code>*_bas_walk_front</code> and <code>*_bas_dash_front</code> from your <code>*_fixed</code> folder.</td></tr>
+      <tr><td style="padding:4.5px 8px;"><strong>Jump &amp; Fall</strong></td><td style="padding:4.5px 8px;"><code>Jump</code> No-loop, <code>Fall</code> Loop</td><td style="padding:4.5px 8px;"><code>*_R15_Jump</code> and <code>*_R15_Fall</code> procedural clips (already matched at the apex).</td></tr>
+      <tr><td style="padding:4.5px 8px;"><strong>Climb, Swim, SwimIdle</strong></td><td style="padding:4.5px 8px;">Loop</td><td style="padding:4.5px 8px;">CC2 fighters rarely include these; provide custom FBXs or separate Version-1 Roblox assets (no duplicate IDs).</td></tr>
     </tbody>
   </table>
 
-  <div class="page-footer">
-    <span>R15 AnimForge User Guide &amp; Technical Report</span>
+  <div class="page-foot">
+    <span>R15 AnimForge v1.0.0 User Guide</span>
     <span>Page 7</span>
   </div>
 </section>
 
-<!-- ==================== PAGE 8: VALIDATION RULES V01-V12 ==================== -->
+<!-- ==================== PAGE 8: VALIDATION RULES ==================== -->
 <section class="page">
-  <div class="page-header">
+  <div class="page-top">
     <strong>R15 AnimForge v1.0.0</strong>
-    <span>Section 07 &bull; Roblox Validation Rules Reference</span>
+    <span>Validation Rules</span>
   </div>
 
-  <h1><span class="sec-num">07</span> Roblox Validation Rules (V01&ndash;V12) Reference</h1>
-  <p>
-    R15 AnimForge's validation rules in <code>data/roblox_rules.json</code> mirror Roblox Studio's <code>UGCValidation</code> checks and Roxie reference rig calibrations. Rules marked <strong>FAIL</strong> block Marketplace submission; rules marked <strong>WARN</strong> are heuristic or soft safety alerts.
+  <h1>7. Roblox Validation Rules (V01&ndash;V12)</h1>
+  <p class="lead" style="margin-bottom:10px;">
+    These twelve checks match Roblox Studio's <code>UGCValidation</code> rules and Roxie reference proportions. Items marked <span class="fail">FAIL</span> will block Roblox upload; items marked <span class="warn-txt">WARN</span> are speed, spin, or seam safety checks.
   </p>
 
-  <table>
+  <style>
+    .vtable td, .vtable th { padding: 4.8px 8px; font-size: 8.35pt; line-height: 1.38; }
+  </style>
+  <table class="vtable" style="margin:6px 0 8px 0;">
     <thead>
-      <tr>
-        <th style="width:7%;">Rule</th>
-        <th style="width:20%;">Check Name</th>
-        <th style="width:9%;">Level</th>
-        <th style="width:17%;">Threshold</th>
-        <th style="width:14%;">Auto-Fixable?</th>
-        <th>Description &amp; Remedy</th>
-      </tr>
+      <tr><th style="width:7%;">Rule</th><th style="width:21%;">Check</th><th style="width:9%;">Level</th><th style="width:16%;">Limit</th><th style="width:13%;">Auto-fix?</th><th>What it means &amp; how to fix it</th></tr>
     </thead>
     <tbody>
-      <tr>
-        <td><code>V01</code></td>
-        <td>Curve Types Allowed</td>
-        <td><span class="tag tag-fail">FAIL</span></td>
-        <td>6 allowed classes</td>
-        <td><span class="tag tag-info">Studio Luau</span></td>
-        <td>Only <code>MarkerCurve</code>, <code>AnimationRigData</code>, <code>Folder</code>, <code>Vector3Curve</code>, <code>EulerRotationCurve</code>, <code>FloatCurve</code> permitted. Run Studio Luau script to remove <code>RotationCurve</code>.</td>
-      </tr>
-      <tr>
-        <td><code>V02</code></td>
-        <td>Joint Manipulation Present</td>
-        <td><span class="tag tag-fail">FAIL</span></td>
-        <td><code>&ge; 0.001 rad</code></td>
-        <td><span class="tag tag-fail">No</span></td>
-        <td>At least one of the 15 R15 joints must rotate. Static guard holds and facial-only clips (<code>fce_*</code>) fail and cannot be auto-fixed.</td>
-      </tr>
-      <tr>
-        <td><code>V03</code></td>
-        <td>Max Body &amp; Tip Linear Speed</td>
-        <td><span class="tag tag-fail">FAIL</span></td>
-        <td><code>51.0 studs/s</code><br>(fix target <code>42.5</code>)</td>
-        <td><span class="tag tag-ok">Yes</span><br>Smooth / Stretch</td>
-        <td>Sampled at <strong>30 FPS &amp; 70 FPS</strong> across all 15 joints plus virtual pinky tips (<code>Left/RightHandPinky3</code>) and foot soles. Enable <strong>Time-stretch</strong> for snaps smoothing alone cannot tame.</td>
-      </tr>
-      <tr>
-        <td><code>V04</code></td>
-        <td>Max Joint Angular Velocity</td>
-        <td><span class="tag tag-warn">WARN</span></td>
-        <td><code>1750 deg/s</code><br>(fix target <code>1600</code>)</td>
-        <td><span class="tag tag-ok">Yes</span><br>Smooth / Stretch</td>
-        <td>Heuristic warning when any joint spins faster than 1750 deg/s. <strong>Peak smoothing</strong> applies targeted kinematic-chain spike damping to clear <code>V04</code> cleanly to <code>PASS</code>.</td>
-      </tr>
-      <tr>
-        <td><code>V05</code></td>
-        <td>Max Floor Penetration Depth</td>
-        <td><span class="tag tag-fail">FAIL</span></td>
-        <td><code>0.10 studs</code><br>(fix target <code>0.07</code>)</td>
-        <td><span class="tag tag-ok">Yes</span><br>Floor lift</td>
-        <td>Tests all 8 bounding corners of both feet against the Roxie standing floor plane (<code>-2.7009</code> studs from HRP). Fixed by lifting <code>LowerTorso.Y</code>.</td>
-      </tr>
-      <tr>
-        <td><code>V06</code></td>
-        <td>Non-LowerTorso Translation</td>
-        <td><span class="tag tag-fail">FAIL</span></td>
-        <td><code>&le; 0.30 studs</code></td>
-        <td><span class="tag tag-ok">Yes</span><br>Strip trans.</td>
-        <td>Only <code>LowerTorso</code> may translate; all other 14 joints must stay pinned. Auto-fix strips all non-LowerTorso translation to zero.</td>
-      </tr>
-      <tr>
-        <td><code>V07</code></td>
-        <td>Key Spacing &amp; Duration</td>
-        <td><span class="tag tag-fail">FAIL</span></td>
-        <td><code>(0, 10.0]s</code><br><code>dt &ge; 1/70s</code></td>
-        <td><span class="tag tag-fail">No</span></td>
-        <td>Animation duration must be positive and &le; 10 seconds, with keyframe spacing &ge; 1/70 s. Clips longer than 10s must be trimmed manually.</td>
-      </tr>
-      <tr>
-        <td><code>V08</code></td>
-        <td>Max Joint Angle From Rest</td>
-        <td><span class="tag tag-fail">FAIL</span></td>
-        <td><code>&le; 180&deg;</code></td>
-        <td><span class="tag tag-ok">Yes</span><br>Clamps</td>
-        <td>Joint angle from rest pose must remain within 180&deg;. <strong>Clamps</strong> enforces a safe margin below the threshold.</td>
-      </tr>
-      <tr>
-        <td><code>V09</code></td>
-        <td>Lowest Point / Max Bounds</td>
-        <td><span class="tag tag-warn">WARN</span></td>
-        <td><code>Y &ge; -3.1</code><br>(fix target <code>-3.02</code>)</td>
-        <td><span class="tag tag-ok">Yes</span><br>Floor lift</td>
-        <td>Soft bounds check relative to <code>HumanoidRootPart</code>. <strong>Floor lift</strong> raises <code>LowerTorso.Y</code> to clear low hand/body dips below <code>-3.1</code> studs.</td>
-      </tr>
-      <tr>
-        <td><code>V10</code></td>
-        <td>Pack Manifest Schema</td>
-        <td><span class="tag tag-fail">FAIL</span></td>
-        <td>Exact 9 slots</td>
-        <td><span class="tag tag-info">Pack Tab</span></td>
-        <td>Verifies exact Studio <code>StringValue</code> names, child counts (1 per slot, 2 for idle), valid numeric asset IDs, positive weights, and zero duplicate IDs.</td>
-      </tr>
-      <tr>
-        <td><code>V11</code></td>
-        <td>Loop Seam Continuity</td>
-        <td><span class="tag tag-warn">WARN</span></td>
-        <td><code>0.015 rad</code></td>
-        <td><span class="tag tag-ok">Yes</span><br>Smooth / Blend</td>
-        <td>Checked only on inferred looping clips (<code>idle</code>, <code>walk</code>, <code>run</code>, <code>dash</code>, <code>fall</code>, <code>*_lp</code>; transitions like <code>bas_nut_turn</code> excluded). <strong>Peak smoothing</strong> smoothly closes loop seams to exact 0.00 parity.</td>
-      </tr>
-      <tr>
-        <td><code>V12</code></td>
-        <td>Numerical &amp; Curve Sanity</td>
-        <td><span class="tag tag-fail">FAIL</span></td>
-        <td>Finite, unit q</td>
-        <td><span class="tag tag-fail">No</span></td>
-        <td>Rejects NaN/Inf values, &lt; 2 frames, non-monotonic timestamps, or non-unit quaternions (corrupted input FBX).</td>
-      </tr>
+      <tr><td><code>V01</code></td><td>Curve classes</td><td><span class="fail">FAIL</span></td><td>6 allowed</td><td>Studio script</td><td>Only <code>EulerRotationCurve</code>, <code>Vector3Curve</code>, <code>FloatCurve</code>, <code>MarkerCurve</code>, <code>Folder</code>, <code>AnimationRigData</code> are permitted.</td></tr>
+      <tr><td><code>V02</code></td><td>Joint rotation present</td><td><span class="fail">FAIL</span></td><td>&ge; 0.001 rad</td><td><span class="fail">No</span></td><td>At least one body joint must rotate. Facial-only (<code>fce_*</code>) and frozen guard holds cannot be auto-fixed.</td></tr>
+      <tr><td><code>V03</code></td><td>Linear speed</td><td><span class="fail">FAIL</span></td><td>51.0 studs/s</td><td><span class="ok">Yes</span></td><td>Checked at 30 &amp; 70 FPS across all joints, pinky tips, and feet. Enable <strong>Time-stretch</strong> for fast snaps.</td></tr>
+      <tr><td><code>V04</code></td><td>Joint spin speed</td><td><span class="warn-txt">WARN</span></td><td>1750 deg/s</td><td><span class="ok">Yes</span></td><td>Per-joint angular velocity warning; fixed automatically by <strong>Peak smoothing</strong>.</td></tr>
+      <tr><td><code>V05</code></td><td>Floor penetration</td><td><span class="fail">FAIL</span></td><td>0.10 studs</td><td><span class="ok">Yes</span></td><td>Tests all 8 corners of both feet against Roblox's floor plane; fixed by <strong>Floor lift</strong>.</td></tr>
+      <tr><td><code>V06</code></td><td>Non-pelvis translation</td><td><span class="fail">FAIL</span></td><td>&le; 0.30 studs</td><td><span class="ok">Yes</span></td><td>Only <code>LowerTorso</code> may translate; auto-fix zeros all other bone positions.</td></tr>
+      <tr><td><code>V07</code></td><td>Duration &amp; spacing</td><td><span class="fail">FAIL</span></td><td>(0, 10]s, &ge;1/70s</td><td><span class="fail">No</span></td><td>Must be 10 seconds or shorter with key spacing &ge; 1/70s. Trim longer cutscenes manually.</td></tr>
+      <tr><td><code>V08</code></td><td>Max joint angle</td><td><span class="fail">FAIL</span></td><td>&le; 180&deg;</td><td><span class="ok">Yes</span></td><td>Keeps every joint rotation within 180&deg; from rest pose via <strong>Clamps</strong>.</td></tr>
+      <tr><td><code>V09</code></td><td>Lowest height / bounds</td><td><span class="warn-txt">WARN</span></td><td>Y &ge; -3.1, d &le; 25</td><td><span class="ok">Yes</span></td><td>Checks low hand/limb dips relative to <code>HumanoidRootPart</code>; cleared by <strong>Floor lift</strong>.</td></tr>
+      <tr><td><code>V10</code></td><td>9-slot pack schema</td><td><span class="fail">FAIL</span></td><td>9 unique IDs</td><td>Pack tab</td><td>Verifies exact Studio folder/<code>StringValue</code> names (2 weighted idles, 1 clip per other slot, no duplicate IDs).</td></tr>
+      <tr><td><code>V11</code></td><td>Loop seam match</td><td><span class="warn-txt">WARN</span></td><td>0.015 rad</td><td><span class="ok">Yes</span></td><td>Checks start-to-end continuity on looping clips (one-shot transitions like <code>bas_nut_turn</code> excluded).</td></tr>
+      <tr><td><code>V12</code></td><td>Data sanity</td><td><span class="fail">FAIL</span></td><td>Finite / unit</td><td><span class="fail">No</span></td><td>Rejects NaN/Inf values, corrupted tracks, or clips with fewer than 2 keyframes.</td></tr>
     </tbody>
   </table>
 
-  <div class="callout ok">
-    <strong>Verified 30 FPS Calibration:</strong> Both FBX export and validation extraction enforce <code>30 FPS</code>, and post-fix re-validation reads the freshly written <code>*_fixed.fbx</code> directly back through headless Blender so the numbers in the table match what Roblox Studio imports.
+  <div class="note">
+    <strong>30 FPS consistency:</strong> Both FBX export and post-fix re-validation sample clips through Blender at 30 FPS so the numbers shown in AnimForge match what Roblox Studio imports.
   </div>
 
-  <div class="page-footer">
-    <span>R15 AnimForge User Guide &amp; Technical Report</span>
+  <div class="page-foot">
+    <span>R15 AnimForge v1.0.0 User Guide</span>
     <span>Page 8</span>
   </div>
 </section>
 
 <!-- ==================== PAGE 9: CLI, PROFILES & TROUBLESHOOTING ==================== -->
 <section class="page">
-  <div class="page-header">
+  <div class="page-top">
     <strong>R15 AnimForge v1.0.0</strong>
-    <span>Section 08 &bull; CLI Reference, Profiles &amp; Troubleshooting</span>
+    <span>CLI &amp; Troubleshooting</span>
   </div>
 
-  <h1><span class="sec-num">08</span> CLI Reference, Profiles &amp; Troubleshooting</h1>
-  <p>
-    Every GUI operation shares the same core Python library with the <code>AnimForge.exe</code> command-line interface. Passing arguments keeps stdout attached for scripting; double-clicking with no arguments launches the dark-mode GUI cleanly with no console window. All commands support <code>--json</code>, <code>--profile</code>, <code>--charcode</code>, and return non-zero exit codes on failure.
+  <h1>8. Command Line, Custom Profiles &amp; Common Issues</h1>
+  <p class="lead">
+    Every feature in the window also works from PowerShell or batch scripts through <code>AnimForge.exe</code>. Double-clicking with no arguments opens the GUI; passing a subcommand runs in the terminal.
   </p>
 
-  <h2>Command-Line Interface Quick Reference</h2>
-<pre># 1. Verify bundled Blender, profiles, math, validation, and procedural builders
+  <h2>Command-Line Reference</h2>
+  <pre style="padding:10px 12px;margin:6px 0 10px 0;"><span class="cmd-note"># Check bundled profiles, math, validation, and builders</span>
 .\AnimForge.exe selftest --json
 
-# 2. Scan any ASBR folder (auto-detects charcode, or override with --charcode)
+<span class="cmd-note"># Scan a folder (auto-detects character, or specify --charcode)</span>
 .\AnimForge.exe scan "D:\ASBR_Data\spc" --charcode 4ykk01 --json
 
-# 3. Convert actions + build Idle/Jump/Fall procedural clips (add --verify-for-upload to validate)
+<span class="cmd-note"># Convert clips + generate Idle/Jump/Fall loops (add --verify-for-upload to auto-check)</span>
 .\AnimForge.exe convert "D:\ASBR_Data\spc" "D:\Out_4ykk01" --charcode 4ykk01 --build-procedural
 
-# 4. Read-only Roblox upload validation (writes validation_report.json &amp; validation_report.html)
+<span class="cmd-note"># Validate existing FBXs and write validation_report.json + validation_report.html</span>
 .\AnimForge.exe validate "D:\Out_4ykk01"
 
-# 5. Explicitly fix failing clips into a separate *_fixed folder and auto re-validate
+<span class="cmd-note"># Fix failing clips into a separate *_fixed folder and re-validate on disk</span>
 .\AnimForge.exe fix "D:\Out_4ykk01" --apply strip_translation floor_lift clamps smoothing time_stretch
 
-# 6. Generate/validate a V10 pack manifest &amp; export Studio Luau post-processor
+<span class="cmd-note"># Validate a 9-slot pack manifest and export the Roblox Studio Luau script</span>
 .\AnimForge.exe build-pack "D:\Out_4ykk01\pack_manifest.json" --write-template --studio-script-out "D:\Out_4ykk01\studio_fix.lua"</pre>
 
-  <h2>Custom Character Profiles (<code>profiles/&lt;charcode&gt;.json</code>)</h2>
-  <p>
-    The bundled <code>profiles/auto.json</code> handles almost every JoJo ASBR / CC2 character automatically. If a specific character needs a custom output prefix (like <code>Rohan_R15_</code> in <code>profiles/4rhn01.json</code>), extra bone name aliases, or tuned cleanup angles, duplicate <code>profiles/auto.json</code> to <code>profiles/&lt;charcode&gt;.json</code> beside <code>AnimForge.exe</code> — <code>auto</code> mode will detect and load it automatically whenever that character code is scanned.
+  <h2 style="margin-top:10px;">Custom Character Profiles (<code>profiles\&lt;charcode&gt;.json</code>)</h2>
+  <p style="margin-bottom:8px;">
+    <code>profiles\auto.json</code> handles almost any ASBR or CC2 character automatically. If you want a custom filename prefix or bone alias for a specific fighter, copy <code>profiles\auto.json</code> to <code>profiles\&lt;charcode&gt;.json</code> (for example, <code>4rhn01.json</code> sets <code>Rohan_R15_</code>). Leaving the app on <code>auto</code> picks it up whenever that charcode is scanned.
   </p>
 
-  <h2>Troubleshooting Common Issues</h2>
-  <table>
+  <h2 style="margin-top:10px;">Troubleshooting Common Problems</h2>
+  <table style="font-size:8.4pt;margin:6px 0;">
     <thead>
-      <tr><th style="width:30%;">Symptom / Error</th><th>Cause &amp; Exact Fix</th></tr>
+      <tr><th style="width:31%;">What you see</th><th>What causes it &amp; how to solve it</th></tr>
     </thead>
     <tbody>
       <tr>
-        <td><strong>Studio: <code>RotationCurve</code> unauthorized / no joint manipulation</strong></td>
-        <td>Roblox Animation Editor defaults FBX imports to quaternion curves. Click <strong>Copy Studio Script</strong> in the <em>Pack &amp; Studio</em> tab, paste into Studio's Command Bar, press Enter, and publish the generated <code>... [FIXED]</code> animations.</td>
+        <td style="padding:5px 8px;">Studio says <code>RotationCurve</code> unauthorized or no joint manipulation</td>
+        <td style="padding:5px 8px;">Studio imported the FBX with quaternion curves. Click <strong>Pack &amp; Studio &rarr; Copy Studio Script</strong>, run it in Studio's Command Bar, and publish the generated <code>... [FIXED]</code> copy instead.</td>
       </tr>
       <tr>
-        <td><strong>Studio Submit: <code>version: 2. Expected version: 1.</code></strong></td>
-        <td>You overwrote an existing Roblox animation ID. Re-publish that clip as a <strong>brand-new Animation asset</strong> (version 1) and update the <code>AnimationId</code> in your pack.</td>
+        <td style="padding:5px 8px;">Upload error: <code>version: 2. Expected version: 1.</code></td>
+        <td style="padding:5px 8px;">You overwrote an existing Roblox animation asset. Publish that clip again as a <strong>brand-new Animation asset</strong> so it is Version 1, then update its ID in the pack.</td>
       </tr>
       <tr>
-        <td><strong><code>Skipped N unfixable clip(s)</code> during Auto-Fix</strong></td>
-        <td>Check the Fix Preview modal or Activity Log: <code>V02</code> clips are face-only/static (cannot be uploaded as body anims); <code>V03</code> clips &gt;51 studs/s need the <strong>Time-stretch</strong> checkbox enabled. Extreme &gt;150 studs/s teleport snaps need manual key trimming.</td>
+        <td style="padding:5px 8px;">Fixer skipped some clips</td>
+        <td style="padding:5px 8px;">Check the Fix Preview dialog or bottom log. Facial/static clips (<code>V02</code>) cannot be uploaded as body animations; fast swings over 51 studs/s usually fix cleanly with <strong>Time-stretch</strong> enabled.</td>
       </tr>
       <tr>
-        <td><strong>Studio: <code>R15Anim.fall.FallAnim</code> duplicate schema error</strong></td>
-        <td>Extra or duplicated <code>Animation</code> instances inside a slot container. Keep exactly 1 child per slot (2 for <code>idle</code>: <code>Animation1</code> Weight=1, <code>Animation2</code> Weight=9) and run <strong>Check Pack Manifest (V10)</strong>.</td>
+        <td style="padding:5px 8px;">DLC character or C-MOON / Pucci Final not listed</td>
+        <td style="padding:5px 8px;">Make sure extracted <code>patch*.cpk</code> / DLC files are inside your input folder. Split variant files (like <code>6pci02</code> + <code>6pci01bod1</code>) pair automatically when both exist.</td>
       </tr>
       <tr>
-        <td><strong><code>No body skeleton archive found</code> on Scan</strong></td>
-        <td>Ensure both the character's <code>*bod1.xfbin</code> and motion <code>*mot1.xfbin</code> / <code>*viewer1.xfbin</code> exist under Input Folder, and that <strong>Charcode</strong> is set to <code>auto</code> (or matches the character present in the folder).</td>
-      </tr>
-      <tr>
-        <td><strong>Where are settings &amp; caches stored?</strong></td>
-        <td>App settings, private Blender env, and CRILAYLA cache live exclusively inside <code>%LOCALAPPDATA%\AnimForge</code>. Resume cache lives in <code>&lt;OutputFolder&gt;\.animforge_cache.json</code>.</td>
+        <td style="padding:5px 8px;">Blender or XFBIN addon not found</td>
+        <td style="padding:5px 8px;">Install Blender 5.3+ and <code>Blender-XFBIN-Importer</code> in Blender's addons folder, or pass <code>--blender</code> / <code>--addon-dir</code> (or set <code>ANIMFORGE_BLENDER</code> / <code>ANIMFORGE_ADDON_DIR</code>).</td>
       </tr>
     </tbody>
   </table>
 
-  <div class="callout" style="margin-top:8px;">
-    <strong>Third-Party Attribution:</strong> R15 AnimForge bundles portable Blender 5.3.0 (GPL-2.0-or-later) and a patched snapshot of Al-Hydra's Blender-XFBIN-Importer. Full license texts and upstream references are included in <code>THIRD_PARTY_LICENSES.md</code> beside <code>AnimForge.exe</code>.
-  </div>
-
-  <div class="page-footer">
-    <span>R15 AnimForge User Guide &amp; Technical Report &bull; v1.0.0</span>
+  <div class="page-foot">
+    <span>R15 AnimForge v1.0.0 User Guide</span>
     <span>Page 9</span>
   </div>
 </section>
