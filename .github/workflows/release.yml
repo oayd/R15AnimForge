@@ -129,6 +129,7 @@ jobs:
           path: signed_dl
 
       - name: Replace executable with signed binary & assemble release assets
+        id: pkg
         shell: pwsh
         run: |
           if ("${{ needs.sign.result }}" -eq "success") {
@@ -143,12 +144,39 @@ jobs:
           $zipPath = ".\release_out\R15AnimForge-$tag-win64-portable.zip"
           Compress-Archive -Path .\release_pkg\AnimForge\* -DestinationPath $zipPath -CompressionLevel Optimal
           Copy-Item .\release_pkg\AnimForge\AnimForge.exe .\release_out\AnimForge.exe -Force
+          $exeSha = (Get-FileHash .\release_out\AnimForge.exe -Algorithm SHA256).Hash.ToLower()
+          $zipSha = (Get-FileHash $zipPath -Algorithm SHA256).Hash.ToLower()
+          Add-Content -Path $env:GITHUB_OUTPUT -Value "exe_sha=$exeSha"
+          Add-Content -Path $env:GITHUB_OUTPUT -Value "zip_sha=$zipSha"
           $hashes = foreach ($f in (Get-ChildItem .\release_out -File | Sort-Object Name)) {
             $h = (Get-FileHash $f.FullName -Algorithm SHA256).Hash.ToLower()
             "$h  $($f.Name)"
           }
           Set-Content -Path .\release_out\SHA256SUMS.txt -Value $hashes -Encoding ASCII
           Get-Content .\release_out\SHA256SUMS.txt
+
+      - name: Upload release binaries to VirusTotal
+        if: ${{ startsWith(github.ref, 'refs/tags/') && env.VIRUSTOTAL_API_KEY != '' }}
+        continue-on-error: true
+        shell: pwsh
+        env:
+          VIRUSTOTAL_API_KEY: ${{ secrets.VIRUSTOTAL_API_KEY }}
+        run: |
+          $tag = "${{ needs.build.outputs.version_tag }}"
+          $targets = @(
+            ".\release_out\AnimForge.exe",
+            ".\release_out\R15AnimForge-$tag-win64-portable.zip"
+          )
+          foreach ($path in $targets) {
+            $item = Get-Item $path
+            $uploadUrl = "https://www.virustotal.com/api/v3/files"
+            if ($item.Length -ge 33554432) {
+              $urlResp = curl.exe -fsS -H "x-apikey: $env:VIRUSTOTAL_API_KEY" "https://www.virustotal.com/api/v3/files/upload_url" | ConvertFrom-Json
+              $uploadUrl = $urlResp.data
+            }
+            Write-Output "Uploading $($item.Name) ($($item.Length) bytes) to VirusTotal..."
+            curl.exe -fsS -X POST -H "x-apikey: $env:VIRUSTOTAL_API_KEY" -F "file=@$($item.FullName)" $uploadUrl | Out-Null
+          }
 
       - name: Generate GitHub Build Provenance Attestation
         uses: actions/attest-build-provenance@v2
@@ -169,7 +197,13 @@ jobs:
             Free code signing provided by [SignPath.io](https://signpath.io/), certificate by [SignPath Foundation](https://signpath.org/).
 
             - **Privacy Policy:** R15 AnimForge runs 100% offline with zero telemetry and will not transfer any information to other networked systems unless specifically requested by the user. See [`SECURITY.md`](https://github.com/oayd/R15AnimForge/blob/main/SECURITY.md) for Authenticode, SHA-256 (`SHA256SUMS.txt`), and GitHub Build Provenance Attestation verification steps.
+
+            ### VirusTotal Scans
+
+            - [`AnimForge.exe`](https://www.virustotal.com/gui/file/${{ steps.pkg.outputs.exe_sha }})
+            - [`R15AnimForge-${{ needs.build.outputs.version_tag }}-win64-portable.zip`](https://www.virustotal.com/gui/file/${{ steps.pkg.outputs.zip_sha }})
           files: |
             release_out/*.zip
             release_out/AnimForge.exe
             release_out/SHA256SUMS.txt
+            docs/R15_AnimForge_User_Guide.pdf

@@ -1,18 +1,18 @@
 # R15 AnimForge
 
-**Offline Windows desktop app & CLI for CyberConnect2 `.xfbin` to Roblox R15 `.fbx` animation conversion, procedural builders, opt-in upload validation, auto-fix, and Animation Pack assembly.**
+**Convert JoJo's Bizarre Adventure: All-Star Battle R (and other CyberConnect2 game) animations into ready-to-use Roblox R15 `.fbx` files — completely offline on Windows.**
 
-Full operator manual: [`docs/R15_AnimForge_User_Guide.pdf`](docs/R15_AnimForge_User_Guide.pdf)
+- [User Guide (PDF)](docs/R15_AnimForge_User_Guide.pdf)
+- [Latest Release & Downloads](https://github.com/oayd/R15AnimForge/releases/latest)
 
 ## Features
 
-- **100% Offline & Non-Destructive**: Zero telemetry, zero runtime network calls, never modifies source `.xfbin` or original `.fbx` files, and isolates Blender runtime state inside `%LOCALAPPDATA%\AnimForge`.
-- **Universal JoJo ASBR / CC2 Support**: Auto-detects any CC2 character code (`0bao01`–`8wou01`, including DLCs, Stands, horses, and split body/motion pairs like `6pci01` + `6pci02`), decodes **139+ ASBR character names** (plus optional `messageInfo.bin.xfbin`), filters out costume-only skins with no animations, and learns stance naming formulas (`bas_r_*`, `bas_s_*`).
-- **XFBIN Discovery & CRI LAYLA Decompression**: Recursively discovers `*<charcode>*.xfbin`, sniffs `NUCC` / `CRILAYLA` headers, decodes CRI LAYLA payloads, locates `bod1` + motion archives (`mot`/`anm`/`viewer`), and excludes VFX/offset archives (`eff1`/`ghh1`/`anmofs`).
-- **Exact World-Delta Retargeting (Blender 5.3+)**: Reconstructs upright Roblox R15 `I-pose` target frames (`R15_Rig`), resolves T-pose-to-I-pose rest offsets (`±90°`), computes hemisphere-continuous quaternions at 30 FPS, supports Blender 5.x slotted/layered actions, and scales pelvis translation.
-- **Procedural Builders**: Synthesizes seamless cyclic `Idle Loop (91f)`, `Alt Idle Look (121f)`, `Jump (36f, Loop=false)`, and `Fall Loop (36f, Loop=true)`.
-- **Opt-In Upload Validation (`V02`–`V09`, `V11`–`V12`) & Explicit Auto-Fix**: Evaluates Roblox Avatar Item rules at 30 & 70 FPS with Roxie reference calibration; auto-fix repairs `V03` speed, `V04` angular spikes, `V05` floor depth, `V06` non-LowerTorso translation, `V08` joint angles, `V09` low tips, and `V11` loop seams into a separate `*_fixed` folder and automatically re-validates on disk.
-- **Studio Post-Processor (`animforge_studio_postprocess.lua`) & Pack Manifest (`V10`)**: Converts Studio quaternion `RotationCurve` instances to `EulerRotationCurve (XYZ)` and validates the 9-slot Roblox pack schema.
+- **100% offline & keeps original files safe**: No internet connection, login, or tracking. Never changes or overwrites your original game files — everything exports into a separate output folder.
+- **Finds characters automatically**: Point it at an extracted game folder and it detects every character (including DLCs, Stands, horses, and split body/animation files), displays readable character names instead of internal codes, and hides costume-only skins with no animations.
+- **One-step conversion to Roblox R15**: Unpacks compressed `.xfbin` game archives automatically and converts animations onto an upright Roblox R15 rig through Blender — no manual bone mapping or fixing twisted T-pose arms.
+- **Creates missing Roblox loops**: Automatically builds smooth **Idle**, **Alt Idle**, **Jump**, and **Fall** animations when a character does not have clean loops for them.
+- **Checks & auto-fixes Roblox upload errors**: Tests your exported clips against Roblox's Avatar Item limits (movement speed, sinking through the floor, extreme joint angles, and choppy loop seams) and saves repaired copies to a separate `*_fixed` folder.
+- **Roblox Studio helper & Animation Pack checker**: Includes a copy-paste Roblox Studio script to fix imported rotation curves and checks that all 9 slots of a Roblox Animation Pack are filled and ready to upload.
 
 ## Requirements & Setup
 
@@ -51,4 +51,7 @@ Free code signing provided by [SignPath.io](https://signpath.io/), certificate b
 
 - **Team Roles**: Committers, Reviewers, and Approvers are the repository maintainers (with mandatory Multi-Factor Authentication enabled on GitHub and SignPath). Release binaries are built exclusively on GitHub-hosted runners (`.github/workflows/release.yml`) from tagged commits before signing.
 - **Privacy Policy**: This program will not transfer any information to other networked systems unless specifically requested by the user or the person installing or operating it. R15 AnimForge operates 100% offline with zero telemetry.
-- **Verification & Security**: See [`SECURITY.md`](SECURITY.md) for Authenticode, SHA-256, and GitHub Build Provenance Attestation verification instructions.
+- **Verification & Security**: See [`SECURITY.md`](SECURITY.md) for Authenticode, SHA-256, GitHub Build Provenance Attestation, and VirusTotal verification instructions.
+- **VirusTotal Reports (`v1.0.0`)**:
+  - [`AnimForge.exe`](https://www.virustotal.com/gui/file/7d0e0ba50b36f129481c89d01b85948046e10f7e9ce44b82f908301435bad576)
+  - [`R15AnimForge-v1.0.0-win64-portable.zip`](https://www.virustotal.com/gui/file/182db0177d1e01826d2310c9f7c51b50095e0d26ffb7326736ad466754cc273c)
